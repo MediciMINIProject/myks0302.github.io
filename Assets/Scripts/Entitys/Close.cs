@@ -44,11 +44,11 @@ public class Close : Enemy
     {
         distance = Vector3.Distance(target.position, this.transform.position);
 
-        if (isDead == false && distance <= mapAgent.stoppingDistance + 1)
+        if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
             closeAnimation.SetTrigger("Attack");//근거리 공격
         }
-        else if (isDead == false && distance > mapAgent.stoppingDistance)
+        else if (isDead == false && distance > (mapAgent.stoppingDistance + 0.5f))
         {
             //이동
             closeAnimation.SetTrigger("Move");
@@ -56,9 +56,11 @@ public class Close : Enemy
 
         if (isDead == true)
         {
-            //closeAnimation.SetTrigger("Dead");
+            closeAnimation.SetTrigger("Death");
 
             Destroy(this.gameObject, 3f);
         }
+
+       
     }
 }

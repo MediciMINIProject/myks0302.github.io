@@ -49,9 +49,7 @@ public class Enemy : HP
         if (HITPOINT <= 0) 
         {
             isDead = true; //사망 상태를 true 로 변경
-        }
-
-        
+        }      
     }
 }
 

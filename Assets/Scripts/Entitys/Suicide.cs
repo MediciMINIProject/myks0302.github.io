@@ -27,21 +27,23 @@ public class Suicide : Enemy
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Target")) 
+        if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
-            collision.gameObject.GetComponent<HP>().TakeDamage(100); //바리케이트 체력 감소
-            this.HITPOINT = 0;
-
             print("부딧침");
 
-            //Destroy(this.gameObject);
+            this.HITPOINT = 0;
+
+            //this.gameObject.transform.rotation = Quaternion.Euler(90, 0, 0);
+
+            GameObject exp = Instantiate(suicideEffect);
+            exp.transform.position = this.transform.position;
+
+            Destroy(this.gameObject);          
         }
     }
+
+
+
 
     
 }

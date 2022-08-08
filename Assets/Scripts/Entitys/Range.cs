@@ -45,23 +45,27 @@ public class Range : Enemy
     {
         distance = Vector3.Distance(target.position, this.transform.position);
 
-        if (isDead == false && distance <= mapAgent.stoppingDistance+1 )
+        if (isDead == false &&  mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
+            //rangeAnimation.SetBool("Walk", false);
             rangeAnimation.SetTrigger("Attack");
-
             //공격
         }
-        else if (isDead == false && distance > mapAgent.stoppingDistance)
+        else if (isDead == false && distance > (mapAgent.stoppingDistance + 0.5f))
         {
-            rangeAnimation.SetTrigger("Walk");
+            rangeAnimation.SetBool("Walk", true);
             //추적
         }
 
         if (isDead == true)
         {
+            rangeAnimation.SetBool("Walk", false);
+
             //rangeAnimation.SetTrigger("Dead");
 
             Destroy(this.gameObject, 3f);
         }
+        
     }
+   
 }
