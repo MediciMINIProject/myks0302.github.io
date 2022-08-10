@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1421d79f1c22c69439c66cfe919a9492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  srEffect: {fileID: 100000, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
+  Bar_transform: {fileID: 4782814996423674008, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}

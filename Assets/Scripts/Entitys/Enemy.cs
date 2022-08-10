@@ -6,7 +6,7 @@ public class Enemy : HP
 {
     #region 몬스터 구분(상속 받은 행동에서 사용)
     public enum EnemyRank { Normal, Cadre }; //몬스터 등급
-    public static EnemyRank enemyRank;
+    public EnemyRank enemyRank;
     #endregion
 
     #region 몬스터 AI

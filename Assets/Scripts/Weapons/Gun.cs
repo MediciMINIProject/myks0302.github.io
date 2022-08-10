@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
 
     #region //부무기 관련
     public enum SubType { SG, SR, GL };
-    SubType subType; //부무기 종류
+    public SubType subType; //부무기 종류
 
     public Sub_SG Sub_SG;
     public Sub_SR Sub_SR;
@@ -41,9 +41,15 @@ public class Gun : MonoBehaviour
 
     #endregion
 
+    public Transform muzzle; //발사 위치
+
+    public LineRenderer laser; //레이저 포인트
+
     // Start is called before the first frame update
     void Start()
     {
+        
+
         switch (gunType)
         {
             case GunType.HG:
@@ -78,16 +84,16 @@ public class Gun : MonoBehaviour
                 break;
         }
 
-        nowMag = magSize;
-        nowStock = maxStock;
+        nowMag = magSize; //주무기 장탄수 채우기
+        nowStock = maxStock; //부무기 장탄수 채우기
 
         canShoot_M = true;
         canShoot_S = true;
     }
 
-    void MainShoot()
+    public void MainShoot()
     {
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //일직선 광선
+        Ray ray = new Ray(muzzle.position, Camera.main.transform.forward); //일직선 광선
 
         RaycastHit hitInfo; //부딧친 상대 확인
 
@@ -95,7 +101,7 @@ public class Gun : MonoBehaviour
         {
             if (hitInfo.transform.name.Contains("Enemy"))
             {
-                Debug.Log("Hit!");
+                
 
                 /*
                 // Enemy에게 너 총 맞았어
@@ -112,38 +118,33 @@ public class Gun : MonoBehaviour
         }
         
         nowMag--;
-
-        if (nowMag <= 0) 
-        {
-            canShoot_M = false;
-        }
     }
 
-    void SubShoot()
+    public void SubShoot()
     {
         switch (subType)
         {
             case SubType.SG:
-
+                Sub_SG newSG = Instantiate(Sub_SG, muzzle.position, muzzle.rotation);
+                newSG.SG_Shoot();
                 break;
             
             case SubType.SR:
-
+                Sub_SR newSR = Instantiate(Sub_SR, muzzle.position, muzzle.rotation);
+                newSR.SR_Shoot();
                 break;
             
             case SubType.GL:
-
+                Sub_GL newGL = Instantiate(Sub_GL, muzzle.position, muzzle.rotation);
+                newGL.GL_Shoot();
                 break;
-        }
-
-        if (nowStock <= 0)
-        {
-            canShoot_S = false;
         }
     }
 
-    IEnumerator Reload() 
+    public IEnumerator Reload() 
     {
+        Debug.Log("Reloading!");
+
         yield return new WaitForSeconds(3.0f);
 
         canShoot_M = true;
@@ -153,7 +154,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) && canShoot_M == true)
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
         {
             MainShoot();
         }
@@ -163,9 +164,19 @@ public class Gun : MonoBehaviour
             SubShoot();
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.Two))
+        if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
         {
             StartCoroutine(Reload());
+        }
+
+        if (nowMag <= 0)
+        {
+            canShoot_M = false;
+        }
+
+        if (nowStock <= 0)
+        {
+            canShoot_S = false;
         }
     }
 

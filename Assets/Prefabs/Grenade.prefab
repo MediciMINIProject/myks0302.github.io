@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce159b8da0c40541ab34df41f6de07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  glEffect: {fileID: 100008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}
 --- !u!135 &8495424288469332689
 SphereCollider:
   m_ObjectHideFlags: 0

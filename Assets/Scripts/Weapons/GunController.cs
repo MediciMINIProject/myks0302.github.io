@@ -15,7 +15,7 @@ public class GunController : MonoBehaviour
     {
         if (selectedGun != null) 
         {
-            EquipGun(selectedGun[0]);
+            EquipGun(selectedGun[2]);
         }
     }
 
@@ -27,6 +27,30 @@ public class GunController : MonoBehaviour
         }
         startGun = Instantiate(startedGun, grabHand.position, grabHand.rotation);
         startGun.transform.parent = grabHand;
+    }
+
+    public void MainShoot() 
+    {
+        if (startGun != null) 
+        {
+            startGun.MainShoot();
+        }
+    }
+    
+    public void SubShoot() 
+    {
+        if (startGun != null)
+        {
+            startGun.SubShoot();
+        }
+    }
+    
+    public void Reload() 
+    {
+        if (startGun != null)
+        {
+            startGun.Reload();
+        }
     }
 
     // Update is called once per frame
