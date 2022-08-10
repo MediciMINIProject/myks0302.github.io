@@ -32,7 +32,7 @@ public class Range : Enemy
 
         while (target != null)
         {
-            Vector3 targetposition = new Vector3(target.position.x, 0, target.position.z); //목표 위치 정보 추출
+            Vector3 targetposition = new(target.transform.position.x, 0, target.transform.position.z); //목표 위치 정보 추출
 
             mapAgent.SetDestination(targetposition); //목표의 위치을 향해 이동
 
@@ -43,13 +43,15 @@ public class Range : Enemy
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(target.position, this.transform.position);
+        distance = Vector3.Distance(target.transform.position, this.transform.position);
 
         if (isDead == false &&  mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
-        {
-            //rangeAnimation.SetBool("Walk", false);
+        {            
             rangeAnimation.SetTrigger("Attack");
             //공격
+            
+            //데미지
+            
         }
         else if (isDead == false && distance > (mapAgent.stoppingDistance + 0.5f))
         {

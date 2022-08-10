@@ -5,6 +5,7 @@ using UnityEngine;
 public class HP : MonoBehaviour
 {
     int hitpoint; // 현재 체력
+
     public int HITPOINT
     {
         get { return hitpoint; }
@@ -27,13 +28,9 @@ public class HP : MonoBehaviour
         }
     } //공통 변수
 
-    public void TakeDamage(int damage) //데미지 받는 메소드
+    public virtual void TakeDamage(int damage) //데미지 받는 메소드
     {
         hitpoint -= damage;
     }
 
-    private void Start()
-    {
-        hitpoint = starthp; //시작 체력을 현재 체력 값에 부여
-    }
 }

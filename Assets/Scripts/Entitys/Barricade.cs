@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class Barricade : HP
 {
+    public HP_UI HP_UI;
 
     // Start is called before the first frame update
     void Start()
     {
         STARTHP = 1000;
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //근접 공격에 피격시
+        HITPOINT = STARTHP;
 
-        //원거리 공격에 피격시
-
-        //자폭 적에게 피격시
-        
+        HP_UI.HPSlider.maxValue = STARTHP;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        HP_UI.HPSlider.value = HITPOINT;
     }
+
 }

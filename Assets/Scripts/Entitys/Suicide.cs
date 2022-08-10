@@ -21,6 +21,8 @@ public class Suicide : Enemy
                 break;
         }
 
+        
+
         StartCoroutine("Approach");
     }
 
@@ -29,16 +31,15 @@ public class Suicide : Enemy
     {
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
-            print("ºÎµ÷Ä§");
 
             this.HITPOINT = 0;
-
-            //this.gameObject.transform.rotation = Quaternion.Euler(90, 0, 0);
 
             GameObject exp = Instantiate(suicideEffect);
             exp.transform.position = this.transform.position;
 
-            Destroy(this.gameObject);          
+            target.GetComponent<HP>().TakeDamage(100);
+            
+            Destroy(this.gameObject);
         }
     }
 
