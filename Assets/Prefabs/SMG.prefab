@@ -397,9 +397,10 @@ MonoBehaviour:
   Sub_SG: {fileID: 4300031937131818416, guid: a770c240bf0e80742acd4a949919c208, type: 3}
   Sub_SR: {fileID: 5384920671178968468, guid: b92d5532a4c5ff44a9e9b55b25dc44e1, type: 3}
   Sub_GL: {fileID: 1377414860142079721, guid: 04bb15c1307289149ae71de14a1d40f1, type: 3}
-  shootEffect: {fileID: 0}
+  shootEffect: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
   muzzle: {fileID: 9092932167737456277}
   laser: {fileID: 4531032236834433512}
+  weaponUI: {fileID: 6981045240335125203, guid: fa860d27ee180174eb132f32446424b7, type: 3}
 --- !u!1 &9094439632275522227
 GameObject:
   m_ObjectHideFlags: 0

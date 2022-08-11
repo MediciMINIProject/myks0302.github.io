@@ -6,6 +6,9 @@ public class Suicide : Enemy
 {
     public GameObject suicideEffect;
 
+
+    public HP_UI hp_ui;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class Suicide : Enemy
                 break;
         }
 
-        
+        hp_ui.HPSlider.maxValue = STARTHP;
 
         StartCoroutine("Approach");
     }
@@ -41,6 +44,8 @@ public class Suicide : Enemy
             
             Destroy(this.gameObject);
         }
+
+        hp_ui.HPSlider.value = HITPOINT;
     }
 
 

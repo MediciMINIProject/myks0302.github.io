@@ -15,7 +15,7 @@ public class GunController : MonoBehaviour
     {
         if (selectedGun != null) 
         {
-            EquipGun(selectedGun[2]);
+            EquipGun(selectedGun[0]);
         }
     }
 

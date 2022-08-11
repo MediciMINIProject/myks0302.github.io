@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   srEffect: {fileID: 100000, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
   Bar_transform: {fileID: 4782814996423674008, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
+  muzzle: {fileID: 5153725433776609851}

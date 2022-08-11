@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
@@ -45,78 +45,77 @@ public class Gun : MonoBehaviour
 
     public LineRenderer laser; //레이저 포인트
 
+    //public WeaponUI.instance WeaponUI.instance; //무장 UI
+
     // Start is called before the first frame update
     void Start()
     {
-        
 
         switch (gunType)
         {
             case GunType.HG:
-                damage = 25;
+                damage = 50;
                 magSize = 8;
-                push_Pow = 10.0f;
+                push_Pow = 5.0f;
                 break;
             case GunType.SMG:
                 damage = 15;
                 magSize = 25;
-                push_Pow = 5.0f;
+                push_Pow = 2.0f;
                 break;
             case GunType.AR:
-                damage = 20;
+                damage = 25;
                 magSize = 40;
-                push_Pow = 7.5f;
+                push_Pow = 3.0f;
                 break;
         }
 
-        switch (subType)
-        {
-            case SubType.SG:
-                Sub_SG.SG_Shoot();
-                break;
-            
-            case SubType.SR:
-                Sub_SR.SR_Shoot();
-                break;
-            
-            case SubType.GL:
-                Sub_GL.GL_Shoot();
-                break;
-        }
 
         nowMag = magSize; //주무기 장탄수 채우기
         nowStock = maxStock; //부무기 장탄수 채우기
 
         canShoot_M = true;
         canShoot_S = true;
+
+        WeaponUI.instance.MAIN_MAX = magSize;
+        WeaponUI.instance.SUB_MAX = maxStock;
+
+        WeaponUI.instance.main.text = nowMag + " / " + magSize;
+        WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
     }
 
     public void MainShoot()
     {
-        Ray ray = new Ray(muzzle.position, Camera.main.transform.forward); //일직선 광선
+        Ray ray = new(muzzle.transform.position, muzzle.transform.forward); //일직선 광선
 
         RaycastHit hitInfo; //부딧친 상대 확인
 
         if (Physics.Raycast(ray, out hitInfo))
         {
-            if (hitInfo.transform.name.Contains("Enemy"))
+            if (hitInfo.transform.CompareTag("Enemy"))
             {
-                
+                GameObject bi = Instantiate(shootEffect);
+                bi.transform.position = hitInfo.point;
 
-                /*
+                bi.transform.forward = hitInfo.normal;
+
+                ParticleSystem ps = bi.GetComponent<ParticleSystem>();
+                ps.Stop();
+                ps.Play();
+
+
                 // Enemy에게 너 총 맞았어
                 Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-                
+
                 //적 데미지
                 enemy.TakeDamage(damage);
 
                 //적 밀려남
                 enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow, ForceMode.Impulse);
-                */
 
             }
         }
-        
+
         nowMag--;
     }
 
@@ -128,28 +127,25 @@ public class Gun : MonoBehaviour
                 Sub_SG newSG = Instantiate(Sub_SG, muzzle.position, muzzle.rotation);
                 newSG.SG_Shoot();
                 break;
-            
+
             case SubType.SR:
                 Sub_SR newSR = Instantiate(Sub_SR, muzzle.position, muzzle.rotation);
                 newSR.SR_Shoot();
                 break;
-            
+
             case SubType.GL:
                 Sub_GL newGL = Instantiate(Sub_GL, muzzle.position, muzzle.rotation);
                 newGL.GL_Shoot();
                 break;
         }
+
+        nowStock--;
+
+
+        StartCoroutine(Recharge());
+
     }
 
-    public IEnumerator Reload() 
-    {
-        Debug.Log("Reloading!");
-
-        yield return new WaitForSeconds(3.0f);
-
-        canShoot_M = true;
-        nowMag = magSize;
-    }
 
     // Update is called once per frame
     void Update()
@@ -157,17 +153,21 @@ public class Gun : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
         {
             MainShoot();
+            WeaponUI.instance.main.text = nowMag + " / " + magSize;
         }
-        
-        if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true) 
+
+        if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true)
         {
             SubShoot();
+            WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
         }
 
         if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
         {
             StartCoroutine(Reload());
         }
+
+
 
         if (nowMag <= 0)
         {
@@ -179,6 +179,34 @@ public class Gun : MonoBehaviour
             canShoot_S = false;
         }
     }
+    public IEnumerator Reload()
+    {
+        WeaponUI.instance.main.text = "Reload...";
 
+        yield return new WaitForSeconds(3.0f);
 
+        WeaponUI.instance.main.text = nowMag + " / " + magSize;
+
+        canShoot_M = true;
+        nowMag = magSize;
+    }
+
+    public IEnumerator Recharge()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        nowStock++;
+
+        if (nowStock != maxStock)
+        {
+            nowStock = maxStock;
+            StartCoroutine(nameof(Recharge), 3.0f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0); //조건 불만족시 연속
+
+            StartCoroutine(nameof(Recharge)); //조건을 만족 안하면 딜레이 없이 계속 실행
+        }
+    }
 }

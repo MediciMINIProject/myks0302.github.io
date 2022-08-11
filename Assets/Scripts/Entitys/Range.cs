@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Range : Enemy
@@ -7,6 +6,9 @@ public class Range : Enemy
     public Animator rangeAnimation; //행동 애니메이션
 
     protected float distance; //자신과 타겟간의 거리
+
+
+    public HP_UI hp_ui;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +24,8 @@ public class Range : Enemy
                 STARTHP = 150;
                 break;
         }
-
         StartCoroutine(Approach());
+        hp_ui.HPSlider.maxValue = STARTHP;
     }
 
     IEnumerator Approach()
@@ -45,13 +47,13 @@ public class Range : Enemy
     {
         distance = Vector3.Distance(target.transform.position, this.transform.position);
 
-        if (isDead == false &&  mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
-        {            
+        if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
+        {
             rangeAnimation.SetTrigger("Attack");
             //공격
-            
+
             //데미지
-            
+
         }
         else if (isDead == false && distance > (mapAgent.stoppingDistance + 0.5f))
         {
@@ -67,7 +69,8 @@ public class Range : Enemy
 
             Destroy(this.gameObject, 3f);
         }
-        
+
+        hp_ui.HPSlider.value = HITPOINT;
     }
-   
+
 }

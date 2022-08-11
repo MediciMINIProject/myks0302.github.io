@@ -10,21 +10,28 @@ public class Sub_SR : MonoBehaviour
 
     public Transform Bar_transform;
 
+    int damage;
+    float push_Pow;
+
+    public Transform muzzle; //발사 위치
+
     // Start is called before the first frame update
     void Start()
     {
-
+        damage = 100;
+        push_Pow = 5.0f;
     }
+
 
     public void SR_Shoot()
     {
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //일직선 광선
+        Ray ray = new Ray(muzzle.transform.position, muzzle.transform.transform.forward); //일직선 광선
 
         RaycastHit hitInfo; //부딧친 상대 확인
 
         if (Physics.Raycast(ray, out hitInfo))
         {
-            if (hitInfo.transform.name.Contains("Enemy"))
+            if (hitInfo.transform.CompareTag("Enemy"))
             {
                 Debug.Log("Hit!");
 
@@ -35,19 +42,31 @@ public class Sub_SR : MonoBehaviour
 
                 if (Dis_SR >= 30)
                 {
-                    Debug.Log("아주 강한 피해");
+                    enemy.TakeDamage(damage);
+
+                    //적 밀려남
+                    enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow, ForceMode.Impulse);
                 }
                 else if (Dis_SR < 30 && Dis_SR <= 20)
                 {
-                    Debug.Log("강한 피해");
+                    enemy.TakeDamage(damage / 2);
+
+                    //적 밀려남
+                    enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow / 2, ForceMode.Impulse);
                 }
                 else if (Dis_SR < 20 && Dis_SR <= 10)
                 {
-                    Debug.Log("약한 피해");
+                    enemy.TakeDamage(damage / 3);
+
+                    //적 밀려남
+                    enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow / 3, ForceMode.Impulse);
                 }
                 else if (Dis_SR < 10)
                 {
-                    Debug.Log("아주 약한 피해");
+                    enemy.TakeDamage(damage / 4);
+
+                    //적 밀려남
+                    enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow / 4, ForceMode.Impulse);
                 }
 
                 /*
@@ -59,6 +78,15 @@ public class Sub_SR : MonoBehaviour
                 //적 밀려남
                 enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow, ForceMode.Impulse);
                 */
+
+                GameObject bi = Instantiate(srEffect);
+                bi.transform.position = hitInfo.point;
+
+                bi.transform.forward = hitInfo.normal;
+
+                ParticleSystem ps = bi.GetComponent<ParticleSystem>();
+                ps.Stop();
+                ps.Play();
 
             }
         }

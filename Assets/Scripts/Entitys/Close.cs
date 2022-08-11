@@ -7,6 +7,8 @@ public class Close : Enemy
 
     protected float distance; //자신과 타겟간의 거리
 
+    public HP_UI hp_ui;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,12 @@ public class Close : Enemy
                 break;
         }
 
+        this.HITPOINT = this.STARTHP;
+
+        hp_ui.HPSlider.maxValue = STARTHP;
+
         StartCoroutine(Approach());
+
     }
 
     IEnumerator Approach()
@@ -42,7 +49,10 @@ public class Close : Enemy
     // Update is called once per frame
     void Update()
     {
+        hp_ui.HPSlider.value = HITPOINT;
+        
         distance = Vector3.Distance(target.transform.position, this.transform.position);
+
 
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
@@ -55,13 +65,20 @@ public class Close : Enemy
             closeAnimation.SetTrigger("Move");
         }
 
+        if (this.HITPOINT <= 0) 
+        {
+            isDead = true;
+        }
+
         if (isDead == true)
         {
             closeAnimation.SetTrigger("Death");
 
             Destroy(this.gameObject, 3f);
+
+            //리지드 바디 및 AI 비 활성화
         }
 
-       
+        
     }
 }
