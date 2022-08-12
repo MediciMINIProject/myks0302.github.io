@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class TakenDamage : HP
 {
-    public Barricade barricade;
-
+    
     public override void TakeDamage(int i) 
     {
-        barricade.TakeDamage(i);
+        Barricade.instance.TakeDamage(i);
     }
 }

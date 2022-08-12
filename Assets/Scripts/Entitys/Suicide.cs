@@ -26,7 +26,7 @@ public class Suicide : Enemy
 
         hp_ui.HPSlider.maxValue = STARTHP;
 
-        StartCoroutine("Approach");
+        StartCoroutine(Approach());
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class Suicide : Enemy
             GameObject exp = Instantiate(suicideEffect);
             exp.transform.position = this.transform.position;
 
-            target.GetComponent<HP>().TakeDamage(100);
+            Barricade.instance.GetComponent<HP>().TakeDamage(100);
             
             Destroy(this.gameObject);
         }

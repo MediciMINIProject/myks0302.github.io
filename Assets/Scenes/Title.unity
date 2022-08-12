@@ -819,7 +819,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1696525225}
+        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
+        m_MethodName: OnApplicationQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &231276020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3211,6 +3223,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80cac62dec3593e49ae37db123f145ea, type: 3}
+--- !u!20 &865806405 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 465402158176421716, guid: 80cac62dec3593e49ae37db123f145ea, type: 3}
+  m_PrefabInstance: {fileID: 865806404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &889053072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3891,7 +3908,7 @@ Transform:
   - {fileID: 275696041}
   - {fileID: 399907806}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1074421818
 GameObject:
@@ -4546,7 +4563,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1696525225}
+        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
+        m_MethodName: GotoSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1149129019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6490,6 +6519,7 @@ GameObject:
   - component: {fileID: 1696525223}
   - component: {fileID: 1696525222}
   - component: {fileID: 1696525221}
+  - component: {fileID: 1696525225}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -6547,7 +6577,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 865806405}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6573,13 +6603,25 @@ RectTransform:
   - {fileID: 249051356}
   - {fileID: 1896183948}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2.75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1696525225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696525220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60e063d0bea11e43b8e2cbec0e75a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1729290728
 GameObject:
   m_ObjectHideFlags: 0
@@ -7695,6 +7737,7 @@ GameObject:
   - component: {fileID: 1896183948}
   - component: {fileID: 1896183950}
   - component: {fileID: 1896183949}
+  - component: {fileID: 1896183951}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -7764,6 +7807,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896183947}
   m_CullTransparentMesh: 1
+--- !u!114 &1896183951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896183947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60e063d0bea11e43b8e2cbec0e75a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1918961066
 GameObject:
   m_ObjectHideFlags: 0
@@ -8393,7 +8448,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1696525225}
+        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
+        m_MethodName: GotoOption
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1996229484
 MonoBehaviour:
   m_ObjectHideFlags: 0

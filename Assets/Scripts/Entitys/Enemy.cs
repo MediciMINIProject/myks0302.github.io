@@ -10,8 +10,6 @@ public class Enemy : HP
     #endregion
 
     #region 몬스터 AI
-    public GameObject target; //추적할 적의 위치 : 바리게이트
-
     public NavMeshAgent mapAgent; //AI 이식 준비
     #endregion
 
@@ -25,17 +23,16 @@ public class Enemy : HP
     {
         isDead = false; //사망 상태를 false == 살아있음
 
-        mapAgent = GetComponent<NavMeshAgent>(); // 자신에게 있는 에이전트 가져오기
-        target = GameObject.FindGameObjectWithTag("Target"); //오브젝트의 위치 가져오기
+        mapAgent = GetComponent<NavMeshAgent>(); // 자신에게 있는 에이전트 가져오기       
     }
 
-    IEnumerator Approach()
+    public IEnumerator Approach()
     {
         float refreshRate = 0.25f;
 
-        while (target != null)
+        while (Barricade.instance.transform != null)
         {
-            Vector3 targetposition = new Vector3(target.transform.position.x, 0, target.transform.position.z); //목표 위치 정보 추출
+            Vector3 targetposition = new Vector3(Barricade.instance.transform.position.x, 0, Barricade.instance.transform.position.z); //목표 위치 정보 추출
 
             mapAgent.SetDestination(targetposition); //목표의 위치을 향해 이동
 

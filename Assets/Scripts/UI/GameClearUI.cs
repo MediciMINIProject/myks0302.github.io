@@ -1,32 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Barricade : HP
+public class GameClearUI : MonoBehaviour
 {
-    public static Barricade instance;
+    public static GameClearUI instance;
 
     private void Awake()
     {
-        Barricade.instance = this;
+        GameClearUI.instance = this;
     }
-
-    public HP_UI HP_UI;
 
     // Start is called before the first frame update
     void Start()
     {
-        STARTHP = 1000;
-
-        HITPOINT = STARTHP;
-
-        HP_UI.HPSlider.maxValue = STARTHP;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        HP_UI.HPSlider.value = HITPOINT;
+        
     }
-
 }

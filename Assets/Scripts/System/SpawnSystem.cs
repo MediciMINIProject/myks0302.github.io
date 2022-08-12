@@ -13,6 +13,8 @@ public class SpawnSystem : MonoBehaviour
     int[] wave = new int[10]; //웨이브 수
 
 
+    
+
     void Spawn() //소환
     {
 

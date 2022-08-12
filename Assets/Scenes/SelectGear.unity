@@ -423,7 +423,7 @@ RectTransform:
   - {fileID: 647617286}
   - {fileID: 835778812}
   m_Father: {fileID: 448075367}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -606,7 +606,7 @@ Transform:
   - {fileID: 380764674}
   - {fileID: 1295904151}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &140213886
 GameObject:
@@ -2592,6 +2592,7 @@ GameObject:
   - component: {fileID: 448075366}
   - component: {fileID: 448075365}
   - component: {fileID: 448075364}
+  - component: {fileID: 448075368}
   m_Layer: 5
   m_Name: SelectUI
   m_TagString: Untagged
@@ -2674,17 +2675,31 @@ RectTransform:
   m_Children:
   - {fileID: 1317007018}
   - {fileID: 1528355044}
-  - {fileID: 628013537}
   - {fileID: 94042356}
+  - {fileID: 628013537}
   - {fileID: 1380464498}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1.75}
   m_SizeDelta: {x: 21999.41, y: 1078.9469}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &448075368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448075363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c18891f979e7ad41a2d689cfcc216d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainSelect: {fileID: 0}
+  subSelect: {fileID: 0}
 --- !u!1 &455673658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,7 +3501,7 @@ RectTransform:
   - {fileID: 1858627797}
   - {fileID: 1343634543}
   m_Father: {fileID: 448075367}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3573,7 +3588,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 448075368}
+        m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
+        m_MethodName: BacktoLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &628013541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6934,7 +6961,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 448075368}
+        m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1380464502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8497,7 +8536,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 448075368}
+        m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
+        m_MethodName: Select_S
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1812649317
 MonoBehaviour:
@@ -9193,7 +9244,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 448075368}
+        m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
+        m_MethodName: Select_M
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1920099743
 MonoBehaviour:

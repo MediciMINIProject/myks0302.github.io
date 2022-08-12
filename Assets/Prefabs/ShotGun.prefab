@@ -51,4 +51,4 @@ MonoBehaviour:
   - {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
   - {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
   - {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
-  Bar_transform: {fileID: 4782814996423674008, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
+  muzzle: {fileID: 8693009157940459642}

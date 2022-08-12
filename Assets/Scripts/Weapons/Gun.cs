@@ -5,7 +5,7 @@ public class Gun : MonoBehaviour
 {
     #region 주무기 관련
     public enum GunType { HG, SMG, AR };
-    public GunType gunType; //주무기 종류
+    public static GunType gunType; //주무기 종류
 
     // 능력치
     int damage; //위력
@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
 
     #region //부무기 관련
     public enum SubType { SG, SR, GL };
-    public SubType subType; //부무기 종류
+    public static SubType subType; //부무기 종류
 
     public Sub_SG Sub_SG;
     public Sub_SR Sub_SR;
@@ -111,7 +111,7 @@ public class Gun : MonoBehaviour
                 enemy.TakeDamage(damage);
 
                 //적 밀려남
-                enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * push_Pow, ForceMode.Impulse);
+                enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * -push_Pow, ForceMode.Impulse);
 
             }
         }
@@ -140,10 +140,6 @@ public class Gun : MonoBehaviour
         }
 
         nowStock--;
-
-
-        StartCoroutine(Recharge());
-
     }
 
 
@@ -178,6 +174,8 @@ public class Gun : MonoBehaviour
         {
             canShoot_S = false;
         }
+
+        StartCoroutine(Recharge());
     }
     public IEnumerator Reload()
     {
