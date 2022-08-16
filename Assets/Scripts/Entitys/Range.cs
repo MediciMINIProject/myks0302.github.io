@@ -25,6 +25,9 @@ public class Range : Enemy
                 break;
         }
         StartCoroutine(Approach());
+
+        this.HITPOINT = this.STARTHP;
+
         hp_ui.HPSlider.maxValue = STARTHP;
     }
 
@@ -34,6 +37,8 @@ public class Range : Enemy
     void Update()
     {
         distance = Vector3.Distance(Barricade.instance.transform.position, this.transform.position);
+        
+        hp_ui.HPSlider.value = HITPOINT;
 
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
@@ -49,16 +54,19 @@ public class Range : Enemy
             //추적
         }
 
-        if (isDead == true)
+        if (this.HITPOINT <= 0)
         {
-            rangeAnimation.SetBool("Walk", false);
-
-            //rangeAnimation.SetTrigger("Dead");
-
-            Destroy(this.gameObject, 3f);
+            isDead = true;
         }
 
-        hp_ui.HPSlider.value = HITPOINT;
+        if (isDead == true)
+        {
+            rangeAnimation.SetTrigger("Dead");
+
+            Destroy(this.gameObject, 3f);
+
+            //리지드 바디 및 AI 비 활성화
+        }
     }
 
 }

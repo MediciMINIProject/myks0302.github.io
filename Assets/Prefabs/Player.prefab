@@ -347,7 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84e9e1fa6e343849813594dddfdd0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabHand: {fileID: 465402158279770013}
+  grabHands:
+  - {fileID: 465402158336664623}
+  - {fileID: 465402159162570481}
   selectedGun:
   - {fileID: -7716699953616038379, guid: 03363e8d60def2f4a89c435cb7e92660, type: 3}
   - {fileID: 8033080642624258586, guid: 3f9701284b2278941a8f69f637cc5688, type: 3}

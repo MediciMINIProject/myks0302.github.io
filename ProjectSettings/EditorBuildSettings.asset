@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectGear.unity
     guid: 4f52d29bc565af143ae6f2e9d059bf61
   - enabled: 1
-    path: Assets/Scenes/Option.unity
-    guid: 3b6078820ccac7a408f483dee162e2e4
-  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:

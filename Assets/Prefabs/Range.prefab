@@ -116,10 +116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRank: 0
-  target: {fileID: 4782814996423674011, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
   mapAgent: {fileID: 5311687931246996388}
   rangeAnimation: {fileID: 1278337185500890648}
-  hp_ui: {fileID: 0}
+  hp_ui: {fileID: 6965584389287219870}
 --- !u!195 &5311687931246996388
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -257,7 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f001f53f41c1d4db177bc0d88840b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barricade: {fileID: 4782814996423674006, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
 --- !u!4 &1222932982138023846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4950051439177134, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
@@ -394,6 +392,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 153343831964536835, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
   m_PrefabInstance: {fileID: 1235389896011538517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6965584389287219870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8182555124764734155, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+  m_PrefabInstance: {fileID: 1235389896011538517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bc7b21b85b93d4a94f29a313c996e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5557317812192589013
 PrefabInstance:
   m_ObjectHideFlags: 0

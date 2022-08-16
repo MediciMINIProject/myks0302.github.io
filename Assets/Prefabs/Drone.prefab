@@ -115,10 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRank: 0
-  target: {fileID: 4782814996423674011, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
   mapAgent: {fileID: -7548584581673191105}
   suicideEffect: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-  hp_ui: {fileID: 0}
+  hp_ui: {fileID: 3999963584659873158}
 --- !u!195 &-7548584581673191105
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -340,6 +339,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+--- !u!114 &3999963584659873158 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8182555124764734155, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+  m_PrefabInstance: {fileID: 5047689900179140429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bc7b21b85b93d4a94f29a313c996e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4912361077154479950 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 153343831964536835, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}

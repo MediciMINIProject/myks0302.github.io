@@ -146,22 +146,46 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
+
+        if (GunController.instance.is_lefthands == true)
         {
-            MainShoot();
-            WeaponUI.instance.main.text = nowMag + " / " + magSize;
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && canShoot_M == true)
+            {
+                MainShoot();
+                WeaponUI.instance.main.text = nowMag + " / " + magSize;
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.Three) && canShoot_S == true)
+            {
+                SubShoot();
+                WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.Four) && nowMag != magSize)
+            {
+                StartCoroutine(Reload());
+            }
+        }
+        else
+        {
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
+            {
+                MainShoot();
+                WeaponUI.instance.main.text = nowMag + " / " + magSize;
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true)
+            {
+                SubShoot();
+                WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
+            {
+                StartCoroutine(Reload());
+            }
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true)
-        {
-            SubShoot();
-            WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
-        }
-
-        if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
-        {
-            StartCoroutine(Reload());
-        }
 
 
 

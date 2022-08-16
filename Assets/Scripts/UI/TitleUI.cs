@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class TitleUI : MonoBehaviour
 {
+    public GameObject optionUI;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.gameObject.SetActive(true);
+        optionUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,7 +28,8 @@ public class TitleUI : MonoBehaviour
 
     public void GotoOption() 
     {
-        SceneManager.CreateScene("Option");
+        this.gameObject.SetActive(false);
+        optionUI.SetActive(true);
     }
 
     public void OnApplicationQuit()

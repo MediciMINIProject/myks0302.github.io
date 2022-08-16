@@ -24,6 +24,8 @@ public class Suicide : Enemy
                 break;
         }
 
+        this.HITPOINT = this.STARTHP;
+
         hp_ui.HPSlider.maxValue = STARTHP;
 
         StartCoroutine(Approach());
@@ -32,6 +34,8 @@ public class Suicide : Enemy
     // Update is called once per frame
     void Update()
     {
+        hp_ui.HPSlider.value = HITPOINT;
+        
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
 
@@ -45,7 +49,19 @@ public class Suicide : Enemy
             Destroy(this.gameObject);
         }
 
-        hp_ui.HPSlider.value = HITPOINT;
+
+        if (this.HITPOINT <= 0)
+        {
+            isDead = true;
+        }
+
+        if (isDead == true)
+        {           
+            //리지드 바디 및 AI 비 활성화
+
+            Destroy(this.gameObject, 3f);
+
+        }
     }
 
 

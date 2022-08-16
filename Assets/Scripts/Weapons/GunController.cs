@@ -1,19 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    public Transform grabHand; // 손 위치
+
+    public static GunController instance;
+
+    private void Awake()
+    {
+        GunController.instance = this;
+    }
+
+    public Transform[] grabHands; // 손 위치
 
     public Gun[] selectedGun;
     Gun startGun;
 
+    public bool is_lefthands;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (selectedGun != null) 
+        is_lefthands = false;
+
+        if (selectedGun != null)
         {
             EquipGun(selectedGun[0]);
         }
@@ -25,27 +34,37 @@ public class GunController : MonoBehaviour
         {
             Destroy(startGun.gameObject);
         }
-        startGun = Instantiate(startedGun, grabHand.position, grabHand.rotation);
-        startGun.transform.parent = grabHand;
+
+        if (is_lefthands == true)
+        {
+            startGun = Instantiate(startedGun, grabHands[1].position, grabHands[1].rotation);
+            startGun.transform.parent = grabHands[1];
+        }
+        else
+        {
+            startGun = Instantiate(startedGun, grabHands[0].position, grabHands[0].rotation);
+            startGun.transform.parent = grabHands[0];
+        }
+
     }
 
-    public void MainShoot() 
+    public void MainShoot()
     {
-        if (startGun != null) 
+        if (startGun != null)
         {
             startGun.MainShoot();
         }
     }
-    
-    public void SubShoot() 
+
+    public void SubShoot()
     {
         if (startGun != null)
         {
             startGun.SubShoot();
         }
     }
-    
-    public void Reload() 
+
+    public void Reload()
     {
         if (startGun != null)
         {
@@ -56,6 +75,6 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
