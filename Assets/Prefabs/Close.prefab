@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3718976222400991812}
   - component: {fileID: -6004058818970387753}
   - component: {fileID: 8101748672442820727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Close
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRank: 0
-  target: {fileID: 4782814996423674011, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
   mapAgent: {fileID: -6004058818970387753}
   closeAnimation: {fileID: 5348642147629694456}
   hp_ui: {fileID: 4528423561490964471}
@@ -245,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f001f53f41c1d4db177bc0d88840b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barricade: {fileID: 4782814996423674006, guid: c31d984e863fb2b4aba0c98f523b0478, type: 3}
 --- !u!4 &5439795065527784064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4762260260221278, guid: 1b20caf01959ecb409333fb9aa0b81da, type: 3}
@@ -263,6 +261,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5435531982756785028}
     m_Modifications:
+    - target: {fileID: 153343831562663232, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153343831562663232, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153343831562663232, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 153343831964536833, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class SelectUI : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class SelectUI : MonoBehaviour
 
     }
 
-    public Dropdown mainSelect;
+    public TMP_Dropdown mainSelect;
     public void Select_M()
     {
         switch (mainSelect.value)
@@ -35,7 +35,7 @@ public class SelectUI : MonoBehaviour
         }
     }
 
-    public Dropdown subSelect;
+    public TMP_Dropdown subSelect;
     public void Select_S()
     {
         switch (subSelect.value)
@@ -56,11 +56,11 @@ public class SelectUI : MonoBehaviour
 
     public void BacktoLobby()
     {
-        SceneManager.CreateScene("Title");
+        SceneManager.LoadScene("Title");
     }
 
     public void StartGame()
     {
-        SceneManager.CreateScene("Game");
+        SceneManager.LoadScene("Game");
     }
 }

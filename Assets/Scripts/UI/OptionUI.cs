@@ -27,7 +27,7 @@ public class OptionUI : MonoBehaviour
         GunController.instance.is_lefthands = true;
     }
 
-    public void Title()
+    public void GotoTitle()
     {
         this.gameObject.SetActive(false);
         titleUI.SetActive(true);

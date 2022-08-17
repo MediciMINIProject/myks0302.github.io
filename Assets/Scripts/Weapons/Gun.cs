@@ -56,17 +56,17 @@ public class Gun : MonoBehaviour
             case GunType.HG:
                 damage = 50;
                 magSize = 8;
-                push_Pow = 5.0f;
+                push_Pow = 0.5f;
                 break;
             case GunType.SMG:
                 damage = 15;
                 magSize = 25;
-                push_Pow = 2.0f;
+                push_Pow = 0.2f;
                 break;
             case GunType.AR:
                 damage = 25;
                 magSize = 40;
-                push_Pow = 3.0f;
+                push_Pow = 0.3f;
                 break;
         }
 
@@ -82,38 +82,39 @@ public class Gun : MonoBehaviour
 
         WeaponUI.instance.main.text = nowMag + " / " + magSize;
         WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
+
     }
 
     public void MainShoot()
     {
-        Ray ray = new(muzzle.transform.position, muzzle.transform.forward); //일직선 광선
-
+        //Ray ray = new(muzzle.position, muzzle.forward); //일직선 광선
+        //Debug.DrawRay(ray.origin, ray.direction * 30.0f, Color.green);
         RaycastHit hitInfo; //부딧친 상대 확인
 
-        if (Physics.Raycast(ray, out hitInfo))
+        if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, 30.0f, 1 << 8))
         {
-            if (hitInfo.transform.CompareTag("Enemy"))
-            {
-                GameObject bi = Instantiate(shootEffect);
-                bi.transform.position = hitInfo.point;
-
-                bi.transform.forward = hitInfo.normal;
-
-                ParticleSystem ps = bi.GetComponent<ParticleSystem>();
-                ps.Stop();
-                ps.Play();
+            Debug.Log("Shoot");
+            return; //LJH
 
 
-                // Enemy에게 너 총 맞았어
-                Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
+            GameObject bi = Instantiate(shootEffect);
+            bi.transform.position = hitInfo.point;
+            bi.transform.forward = hitInfo.normal;
 
-                //적 데미지
-                enemy.TakeDamage(damage);
+            ParticleSystem ps = bi.GetComponent<ParticleSystem>();
+            ps.Stop();
+            ps.Play();
 
-                //적 밀려남
-                enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * -push_Pow, ForceMode.Impulse);
 
-            }
+            // Enemy에게 너 총 맞았어
+            Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
+
+            //적 데미지
+            enemy.TakeDamage(damage);
+
+            //적 밀려남
+            enemy.gameObject.GetComponent<Rigidbody>().AddForce(hitInfo.transform.position * -push_Pow, ForceMode.Impulse);
+
         }
 
         nowMag--;
@@ -146,6 +147,8 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(muzzle.position, muzzle.forward * 30.0f, Color.green);
+
 
         if (GunController.instance.is_lefthands == true)
         {
@@ -199,7 +202,23 @@ public class Gun : MonoBehaviour
             canShoot_S = false;
         }
 
-        StartCoroutine(Recharge());
+        //StartCoroutine(Recharge());
+
+        laser.SetPosition(0, muzzle.position); //하나는 총구에
+
+        Ray ray = new(muzzle.transform.position, muzzle.transform.forward); //일직선 광선
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo) && hitInfo.transform.CompareTag("Enemy"))
+        {
+
+            laser.SetPosition(1, hitInfo.transform.position); //나머지 하나는 그 적에게
+
+        }
+        else
+        {
+            laser.SetPosition(1, muzzle.position);
+        }
     }
     public IEnumerator Reload()
     {
@@ -215,13 +234,12 @@ public class Gun : MonoBehaviour
 
     public IEnumerator Recharge()
     {
-        yield return new WaitForSeconds(3.0f);
-
-        nowStock++;
-
         if (nowStock != maxStock)
         {
-            nowStock = maxStock;
+            yield return new WaitForSeconds(3.0f);
+
+            nowStock++;
+           
             StartCoroutine(nameof(Recharge), 3.0f);
         }
         else

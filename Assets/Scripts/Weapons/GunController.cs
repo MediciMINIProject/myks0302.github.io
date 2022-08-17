@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GunController : MonoBehaviour
 
     public Transform[] grabHands; // 손 위치
 
-    public Gun[] selectedGun;
+    public Gun selectedGun;
     Gun startGun;
 
     public bool is_lefthands;
@@ -24,8 +25,12 @@ public class GunController : MonoBehaviour
 
         if (selectedGun != null)
         {
-            EquipGun(selectedGun[0]);
+            EquipGun(selectedGun);
         }
+
+        
+
+        //게임 도중에는 끄기
     }
 
     private void EquipGun(Gun startedGun)
@@ -76,5 +81,6 @@ public class GunController : MonoBehaviour
     void Update()
     {
 
+        
     }
 }

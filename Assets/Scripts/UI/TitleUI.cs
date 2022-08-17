@@ -23,7 +23,7 @@ public class TitleUI : MonoBehaviour
 
     public void GotoSelect() 
     {
-        SceneManager.CreateScene("SelectGear");
+        SceneManager.LoadScene("SelectGear");
     }
 
     public void GotoOption() 
