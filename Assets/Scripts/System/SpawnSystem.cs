@@ -9,12 +9,45 @@ public class MosterWave
 {
     public static int wave;
 
-    public int nor_close; //일반 근접
-    public int nor_range; //일반 원거리
-    public int nor_drone; //일반 자폭
+    public int num_close; //일반 근접
+    public int num_range; //일반 원거리
+    public int num_drone; //일반 자폭
+
+
 }
 public class SpawnSystem : MonoBehaviour
 {
+    public int NUM_CLOSE
+    {
+        get { return mosterWaves[wavecount].num_close; }
+
+        set 
+        {
+            mosterWaves[wavecount].num_close = value;
+        }
+    }
+
+    public int NUM_RANGE
+    {
+        get { return mosterWaves[wavecount].num_range; }
+
+        set
+        {
+            mosterWaves[wavecount].num_range = value; 
+        }
+    }
+
+    public int NUM_DRONE 
+    {
+        get { return mosterWaves[wavecount].num_drone; }
+
+        set
+        {
+            mosterWaves[wavecount].num_drone = value; 
+        }
+    }
+
+
     public static SpawnSystem instance;
 
     private void Awake()
@@ -40,6 +73,8 @@ public class SpawnSystem : MonoBehaviour
     public TextMeshProUGUI waveUI;
     public TextMeshProUGUI remainUI;
 
+    //수 변화
+    
     void Spawn_Close(int count) //소환 기본틀
     {
         for (int i = count; i > 0; i--)
@@ -89,9 +124,9 @@ public class SpawnSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
 
-        Spawn_Close(mosterWaves[wavecount].nor_close);
-        Spawn_Range(mosterWaves[wavecount].nor_range);
-        Spawn_Drone(mosterWaves[wavecount].nor_drone);
+        Spawn_Close(mosterWaves[wavecount].num_close);
+        Spawn_Range(mosterWaves[wavecount].num_range);
+        Spawn_Drone(mosterWaves[wavecount].num_drone);
 
 
 
@@ -118,7 +153,7 @@ public class SpawnSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        waveremain = mosterWaves[wavecount].nor_close + mosterWaves[wavecount].nor_range + mosterWaves[wavecount].nor_drone;
+        waveremain = mosterWaves[wavecount].num_close + mosterWaves[wavecount].num_range + mosterWaves[wavecount].num_drone;
 
         waveUI.text = "Wave" + "\n" + (wavecount + 1) + " / " + mosterWaves.Length;
         remainUI.text = "Remain" + "\n" + waveremain;

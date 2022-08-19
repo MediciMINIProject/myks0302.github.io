@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Range : Enemy
@@ -14,16 +13,9 @@ public class Range : Enemy
     void Start()
     {
         //체력 배정
-        switch (enemyRank)
-        {
-            case EnemyRank.Normal:
-                STARTHP = 100;
-                break;
 
-            case EnemyRank.Cadre:
-                STARTHP = 150;
-                break;
-        }
+        STARTHP = 100;
+
         StartCoroutine(Approach());
 
         this.HITPOINT = this.STARTHP;
@@ -31,13 +23,13 @@ public class Range : Enemy
         hp_ui.HPSlider.maxValue = STARTHP;
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
         distance = Vector3.Distance(Barricade.instance.transform.position, this.transform.position);
-        
+
         hp_ui.HPSlider.value = HITPOINT;
 
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
@@ -62,6 +54,8 @@ public class Range : Enemy
         if (isDead == true)
         {
             rangeAnimation.SetTrigger("Dead");
+
+            SpawnSystem.instance.NUM_RANGE -= 1;
 
             Destroy(this.gameObject, 3f);
 

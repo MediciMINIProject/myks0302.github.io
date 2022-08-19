@@ -4,10 +4,6 @@ using UnityEngine.AI; //NavAgent를 사용하기 위한 준비
 
 public class Enemy : HP
 {
-    #region 몬스터 구분(상속 받은 행동에서 사용)
-    public enum EnemyRank { Normal, Cadre }; //몬스터 등급
-    public EnemyRank enemyRank;
-    #endregion
 
     #region 몬스터 AI
     public NavMeshAgent mapAgent; //AI 이식 준비
@@ -42,11 +38,7 @@ public class Enemy : HP
 
     
     private void Update()
-    {
-        if (HITPOINT <= 0) 
-        {
-            isDead = true; //사망 상태를 true 로 변경
-        }      
+    {   
     }
 }
 

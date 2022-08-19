@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Close : Enemy
 {
@@ -9,20 +9,14 @@ public class Close : Enemy
 
     public HP_UI hp_ui;
 
+    private NavMeshAgent NavMeshAgent;
+    private CapsuleCollider capsuleCollider;
+
     // Start is called before the first frame update
     void Start()
     {
         //체력 배정
-        switch (enemyRank)
-        {
-            case EnemyRank.Normal:
-                STARTHP = 150;
-                break;
-
-            case EnemyRank.Cadre:
-                STARTHP = 250;
-                break;
-        }
+        STARTHP = 150;
 
         this.HITPOINT = this.STARTHP;
 
@@ -30,15 +24,17 @@ public class Close : Enemy
 
         StartCoroutine(Approach());
 
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
-   
+
 
     // Update is called once per frame
     void Update()
     {
         hp_ui.HPSlider.value = HITPOINT;
-        
+
         distance = Vector3.Distance(Barricade.instance.transform.position, this.transform.position);
 
 
@@ -53,20 +49,26 @@ public class Close : Enemy
             closeAnimation.SetTrigger("Move");
         }
 
-        if (this.HITPOINT <= 0) 
+        if (this.HITPOINT <= 0)
         {
-            isDead = true;
+            isDead = true;           
         }
 
         if (isDead == true)
         {
             closeAnimation.SetTrigger("Death");
-
-            Destroy(this.gameObject, 3f);
+            
+            Destroy(this.gameObject, 2f);
 
             //리지드 바디 및 AI 비 활성화
+            NavMeshAgent.enabled = false;
+            capsuleCollider.enabled = false;
         }
-
         
+    }
+
+    private void OnDisable()
+    {
+        SpawnSystem.instance.NUM_CLOSE -= 1;
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Suicide : Enemy
@@ -13,16 +11,8 @@ public class Suicide : Enemy
     void Start()
     {
         //체력 배정
-        switch (enemyRank)
-        {
-            case EnemyRank.Normal:
-                STARTHP = 50;
-                break;
+        STARTHP = 50;
 
-            case EnemyRank.Cadre:
-                STARTHP = 100;
-                break;
-        }
 
         this.HITPOINT = this.STARTHP;
 
@@ -35,7 +25,7 @@ public class Suicide : Enemy
     void Update()
     {
         hp_ui.HPSlider.value = HITPOINT;
-        
+
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
 
@@ -45,7 +35,7 @@ public class Suicide : Enemy
             exp.transform.position = this.transform.position;
 
             Barricade.instance.GetComponent<HP>().TakeDamage(100);
-            
+
             Destroy(this.gameObject);
         }
 
@@ -56,8 +46,10 @@ public class Suicide : Enemy
         }
 
         if (isDead == true)
-        {           
+        {
             //리지드 바디 및 AI 비 활성화
+
+            SpawnSystem.instance.NUM_DRONE -= 1;
 
             Destroy(this.gameObject, 3f);
 
@@ -67,5 +59,5 @@ public class Suicide : Enemy
 
 
 
-    
+
 }

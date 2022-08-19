@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 3554067761632609497}
   - component: {fileID: 3545662115959799243}
   - component: {fileID: 3537115880501548141}
+  - component: {fileID: -5443226037947074264}
   m_Layer: 0
   m_Name: Revolver
   m_TagString: Untagged
@@ -275,7 +276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3550625051249416941}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.28, z: 0.232}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -336,6 +337,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-5443226037947074264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3550625051249416941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c6c8667a81be647a2661a67308c13e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzle: {fileID: 9083785910101427998}
+  bullet: {fileID: -893180536969254722, guid: cd5f6fccfcf03f7448f2b9aa958cfb0c, type: 3}
+  SG_Test: {fileID: 8500007646087507367, guid: 9925f5ed3e4feb24d9a5cae43fe9795f, type: 3}
 --- !u!1 &6203328165139867706
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6203328165139867706}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13, z: 0.55}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0.575}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
