@@ -13,27 +13,24 @@ public class GunController : MonoBehaviour
 
     public Transform[] grabHands; // 손 위치
 
-    public Gun selectedGun;
-    Gun startGun;
+    public Gun_Test selectedGun;
+    Gun_Test startGun;
 
     public bool is_lefthands;
 
     // Start is called before the first frame update
     void Start()
     {
-        is_lefthands = false;
 
         if (selectedGun != null)
         {
             EquipGun(selectedGun);
-        }
-
-        
+        }     
 
         //게임 도중에는 끄기
     }
 
-    private void EquipGun(Gun startedGun)
+    private void EquipGun(Gun_Test startedGun)
     {
         if (startGun != null)
         {
@@ -57,7 +54,7 @@ public class GunController : MonoBehaviour
     {
         if (startGun != null)
         {
-            startGun.MainShoot();
+            startGun.Shooting_M();
         }
     }
 
@@ -65,7 +62,7 @@ public class GunController : MonoBehaviour
     {
         if (startGun != null)
         {
-            startGun.SubShoot();
+            startGun.Shooting_S();
         }
     }
 
@@ -80,7 +77,5 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
     }
 }

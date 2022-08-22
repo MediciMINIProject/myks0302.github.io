@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bullet_body.AddForce(transform.up, ForceMode.Impulse);
+        bullet_body.AddForce(transform.forward, ForceMode.Impulse);
     }
     private void OnCollisionEnter(Collision collision)
     {

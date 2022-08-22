@@ -22,15 +22,15 @@ public class SelectUI : MonoBehaviour
         switch (mainSelect.value)
         {
             case 0:
-                Gun.gunType = Gun.GunType.HG;
+                Gun_Test.gunType = Gun_Test.GunType.HG;
                 break;
 
             case 1:
-                Gun.gunType = Gun.GunType.SMG;
+                Gun_Test.gunType = Gun_Test.GunType.SMG;
                 break;
 
             case 2:
-                Gun.gunType = Gun.GunType.AR;
+                Gun_Test.gunType = Gun_Test.GunType.AR;
                 break;
         }
     }
@@ -41,15 +41,15 @@ public class SelectUI : MonoBehaviour
         switch (subSelect.value)
         {
             case 0:
-                Gun.subType = Gun.SubType.SG;
+                Gun_Test.subType = Gun_Test.SubType.SG;
                 break;
 
             case 1:
-                Gun.subType = Gun.SubType.SR;
+                Gun_Test.subType = Gun_Test.SubType.SR;
                 break;
 
             case 2:
-                Gun.subType = Gun.SubType.GL;
+                Gun_Test.subType = Gun_Test.SubType.GL;
                 break;
         }
     }

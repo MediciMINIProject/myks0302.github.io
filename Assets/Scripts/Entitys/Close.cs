@@ -38,12 +38,12 @@ public class Close : Enemy
         distance = Vector3.Distance(Barricade.instance.transform.position, this.transform.position);
 
 
-        if (isDead == false && distance <= (mapAgent.stoppingDistance + 0.5f))
+        if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
             closeAnimation.SetTrigger("Attack");//근거리 공격
 
         }
-        else if (isDead == false && distance > (mapAgent.stoppingDistance + 0.5f))
+        else if (isDead == false && mapAgent.remainingDistance > (mapAgent.stoppingDistance + 0.5f))
         {
             //이동
             closeAnimation.SetTrigger("Move");

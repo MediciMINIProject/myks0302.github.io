@@ -94,7 +94,7 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, 30.0f, 1 << 8))
         {
             Debug.Log("Shoot");
-            return; //LJH
+            
 
 
             GameObject bi = Instantiate(shootEffect);

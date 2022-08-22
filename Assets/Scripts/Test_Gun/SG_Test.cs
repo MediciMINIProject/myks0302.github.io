@@ -9,7 +9,7 @@ public class SG_Test : MonoBehaviour
     public Transform muzzle;
 
     int pellets = 8; // 탄환 수
-    float spreadAngle = 2.5f; //흩어지는 정도
+    float spreadAngle = 5f; //흩어지는 정도
 
     List<Quaternion> sgShell;
 
@@ -21,11 +21,6 @@ public class SG_Test : MonoBehaviour
         {
             sgShell.Add(Quaternion.Euler(Vector3.zero));
         }
-    }
-
-    void Start()
-    {
-
     }
 
     public void SG_Shoot()
@@ -40,9 +35,4 @@ public class SG_Test : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

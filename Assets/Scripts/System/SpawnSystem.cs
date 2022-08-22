@@ -63,17 +63,13 @@ public class SpawnSystem : MonoBehaviour
 
     public MosterWave[] mosterWaves;
 
-    int wavecount; //현재 웨이브
+    public int wavecount; //현재 웨이브
 
-    int waveremain; //남은 적 수
-
-    public GameObject restUI;
-    public GameObject clearUI;
+    public int waveremain; //남은 적 수
 
     public TextMeshProUGUI waveUI;
     public TextMeshProUGUI remainUI;
 
-    //수 변화
     
     void Spawn_Close(int count) //소환 기본틀
     {
@@ -114,41 +110,19 @@ public class SpawnSystem : MonoBehaviour
     {
         wavecount = 0;
 
-        restUI.SetActive(false);
-        clearUI.SetActive(false);
-
         StartCoroutine(WaveSystem());
     }
 
-    IEnumerator WaveSystem()
+    public IEnumerator WaveSystem()
     {
         yield return new WaitForSeconds(5.0f);
 
         Spawn_Close(mosterWaves[wavecount].num_close);
         Spawn_Range(mosterWaves[wavecount].num_range);
         Spawn_Drone(mosterWaves[wavecount].num_drone);
-
-
-
-        if (waveremain == mosterWaves.Length - 1)
-        {
-            restUI.SetActive(false);
-            clearUI.SetActive(true);
-        }
     }
 
-    public void NextWave() //버튼 이식
-    {
-        wavecount++;
-
-        //시간 흐르게 하기
-        Time.timeScale = 1;
-
-        //창
-        restUI.SetActive(false);
-
-        StartCoroutine(WaveSystem());
-    }
+  
 
     // Update is called once per frame
     void Update()
@@ -156,15 +130,6 @@ public class SpawnSystem : MonoBehaviour
         waveremain = mosterWaves[wavecount].num_close + mosterWaves[wavecount].num_range + mosterWaves[wavecount].num_drone;
 
         waveUI.text = "Wave" + "\n" + (wavecount + 1) + " / " + mosterWaves.Length;
-        remainUI.text = "Remain" + "\n" + waveremain;
-
-        if (waveremain == 0)
-        {
-            //일시정지
-            Time.timeScale = 0;
-
-            //창
-            restUI.SetActive(true);
-        }
+        remainUI.text = "Remain" + "\n" + waveremain;      
     }
 }

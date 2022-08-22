@@ -12,25 +12,18 @@ public class GameOverUI : MonoBehaviour
         GameOverUI.instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     public void Restart() 
-    { }
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void Exchange() 
-    { }
+    {
+        SceneManager.LoadScene("SelectGear");
+    }
 
     public void Quit() 
-    { 
+    {
+        SceneManager.LoadScene("Title");
     }
 }

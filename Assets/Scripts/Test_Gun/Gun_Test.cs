@@ -16,14 +16,19 @@ public class Gun_Test : MonoBehaviour
     public enum SubType { SG, SR, GL };
     public static SubType subType; //ºÎ¹«±â Á¾·ù
 
-    public Transform muzzle; //ÃÑ±¸
+    public GameObject[] weaponPrefabs;
+
+    public Transform[] muzzle; //ÃÑ±¸
+    Transform nowMuzzle; //³ª¿Í¾ß ÇÏ´Â ÃÑ±¸
 
     public Bullet bullet;//ÅºÈ¯
 
     public SG_Test SG_Test;
+    public Sub_GL Sub_GL;
+    public SR_Test SR_Test;
 
-    int maxMag;
-    int nowMag;
+    int maxMag; //ÃÑ±â¸¶´Ù ¼³Á¤µÈ ±âº» ÅºÃ¢
+    int nowMag; //ÇöÀç ³²Àº ÅºÈ¯ °³¼ö
 
     bool isReload;
 
@@ -35,54 +40,77 @@ public class Gun_Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        foreach (GameObject prefab in weaponPrefabs) 
+        {
+            prefab.SetActive(false);
+        }
+
         isReload = false;
 
         switch (gunType)
         {
             case GunType.HG:
                 maxMag = 8;
+                nowMuzzle = muzzle[0];
+                weaponPrefabs[0].SetActive(true);
                 break;
+            
             case GunType.SMG:
                 maxMag = 25;
+                nowMuzzle = muzzle[1];
+                weaponPrefabs[1].SetActive(true);
                 break;
+            
             case GunType.AR:
                 maxMag = 40;
+                nowMuzzle = muzzle[2];
+                weaponPrefabs[2].SetActive(true);
                 break;
         }
 
+        WeaponUI.instance.MAIN_MAX = maxMag;
+        WeaponUI.instance.SUB_MAX = maxStock;
         nowMag = maxMag;
 
         maxStock = 3;
         nowStock = maxStock;
 
-        WeaponUI.instance.MAIN_MAX = maxMag;
-        WeaponUI.instance.SUB_MAX = maxStock;
 
         if (nowStock <= maxStock)
         {
             InvokeRepeating(nameof(Recharge), 0, 5);
         }
+
+        
     }
 
-    void Shooting_M()
+    public void Shooting_M()
     {
         if (nowMag != 0)
         {
-            Instantiate(bullet, muzzle);
+            Instantiate(bullet, nowMuzzle);
         }
 
         nowMag--;
     }
 
-    void shooting_S()
+    public void Shooting_S()
     {
         if (nowStock > 0)
         {
             switch (subType)
             {
                 case SubType.SG:
-                    SG_Test newSG = Instantiate(SG_Test, muzzle.position, muzzle.rotation);
+                    SG_Test newSG = Instantiate(SG_Test, nowMuzzle.position, nowMuzzle.rotation);
                     newSG.SG_Shoot();
+                    break;
+                case SubType.SR:
+                    SR_Test newSR = Instantiate(SR_Test, nowMuzzle.position, nowMuzzle.rotation);
+                    newSR.SR_Shoot();
+                    break;
+                case SubType.GL:
+                    Sub_GL newGL = Instantiate(Sub_GL, nowMuzzle.position, nowMuzzle.rotation);
+                    newGL.GL_Shoot();
                     break;
             }
         }
@@ -93,21 +121,45 @@ public class Gun_Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
-        {
-            Shooting_M();
+        
 
+        if (GunController.instance.is_lefthands == true)
+        {
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+            {
+                Shooting_M();
+
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.Three) && isDelay == false)
+            {
+                Shooting_S();
+                StartCoroutine(Delay());
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.Four))
+            {
+                StartCoroutine(Reload());
+            }
         }
-
-        if (OVRInput.GetDown(OVRInput.Button.One) && isDelay == false)
+        else 
         {
-            shooting_S();
-            StartCoroutine(Delay());
-        }
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            {
+                Shooting_M();
 
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            StartCoroutine(Reload());
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.One) && isDelay == false)
+            {
+                Shooting_S();
+                StartCoroutine(Delay());
+            }
+
+            if (OVRInput.GetDown(OVRInput.Button.Two))
+            {
+                StartCoroutine(Reload());
+            }
         }
 
 

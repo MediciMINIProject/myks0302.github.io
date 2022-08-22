@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Range : Enemy
 {
@@ -8,6 +9,9 @@ public class Range : Enemy
 
 
     public HP_UI hp_ui;
+
+    private NavMeshAgent NavMeshAgent;
+    private CapsuleCollider capsuleCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,9 @@ public class Range : Enemy
         this.HITPOINT = this.STARTHP;
 
         hp_ui.HPSlider.maxValue = STARTHP;
+
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
 
@@ -40,10 +47,9 @@ public class Range : Enemy
             //데미지
 
         }
-        else if (isDead == false && distance > (mapAgent.stoppingDistance + 0.5f))
+        else if (isDead == false && mapAgent.remainingDistance > (mapAgent.stoppingDistance + 0.5f))
         {
             rangeAnimation.SetBool("Walk", true);
-            //추적
         }
 
         if (this.HITPOINT <= 0)
@@ -55,12 +61,18 @@ public class Range : Enemy
         {
             rangeAnimation.SetTrigger("Dead");
 
-            SpawnSystem.instance.NUM_RANGE -= 1;
-
             Destroy(this.gameObject, 3f);
 
             //리지드 바디 및 AI 비 활성화
+            NavMeshAgent.enabled = false;
+            capsuleCollider.enabled = false;
         }
+
+
     }
 
+    private void OnDisable()
+    {
+        SpawnSystem.instance.NUM_RANGE -= 1;
+    }
 }

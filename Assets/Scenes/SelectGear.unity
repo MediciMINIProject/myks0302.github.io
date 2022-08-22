@@ -9663,6 +9663,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 465402158935530601, guid: 80cac62dec3593e49ae37db123f145ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465402158935530601, guid: 80cac62dec3593e49ae37db123f145ea, type: 3}
       propertyPath: selectedGun
       value: 
       objectReference: {fileID: -7716699953616038379, guid: 03363e8d60def2f4a89c435cb7e92660, type: 3}

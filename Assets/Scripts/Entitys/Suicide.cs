@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Suicide : Enemy
 {
     public GameObject suicideEffect;
-
-
     public HP_UI hp_ui;
+
+    private NavMeshAgent NavMeshAgent;
+    private CapsuleCollider capsuleCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,9 @@ public class Suicide : Enemy
         hp_ui.HPSlider.maxValue = STARTHP;
 
         StartCoroutine(Approach());
+
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -47,17 +52,17 @@ public class Suicide : Enemy
 
         if (isDead == true)
         {
-            //리지드 바디 및 AI 비 활성화
-
-            SpawnSystem.instance.NUM_DRONE -= 1;
-
             Destroy(this.gameObject, 3f);
 
+            //리지드 바디 및 AI 비 활성화
+            NavMeshAgent.enabled = false;
+            capsuleCollider.enabled = false;
         }
     }
 
 
-
-
-
+    private void OnDisable()
+    {
+        SpawnSystem.instance.NUM_DRONE -= 1;
+    }
 }

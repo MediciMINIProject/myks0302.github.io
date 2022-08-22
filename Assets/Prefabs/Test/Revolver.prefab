@@ -350,8 +350,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 9083785910101427998}
-  bullet: {fileID: -893180536969254722, guid: cd5f6fccfcf03f7448f2b9aa958cfb0c, type: 3}
+  bullet: {fileID: 3785275346075591181, guid: cd5f6fccfcf03f7448f2b9aa958cfb0c, type: 3}
   SG_Test: {fileID: 8500007646087507367, guid: 9925f5ed3e4feb24d9a5cae43fe9795f, type: 3}
+  Sub_GL: {fileID: 1377414860142079721, guid: 04bb15c1307289149ae71de14a1d40f1, type: 3}
+  SR_Test: {fileID: 73115219384618045, guid: d04cf2540033b3c42b90e7d7fd33ab6c, type: 3}
 --- !u!1 &6203328165139867706
 GameObject:
   m_ObjectHideFlags: 0

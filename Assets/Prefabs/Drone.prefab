@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4531512777530235689}
   - component: {fileID: -7548584581673191105}
   - component: {fileID: 4225662334305585808}
+  - component: {fileID: 4537830462987646257}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Enemy
@@ -114,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e095eea634cabe640b55a5d88e5ed29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRank: 0
   mapAgent: {fileID: -7548584581673191105}
   suicideEffect: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
   hp_ui: {fileID: 3999963584659873158}
@@ -156,6 +156,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4537830462987646257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442196915898147483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4515e3b043454a4c86879a3b9805729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1442196917051786020
 PrefabInstance:
   m_ObjectHideFlags: 0

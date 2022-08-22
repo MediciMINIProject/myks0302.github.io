@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SR_Bullet : MonoBehaviour
@@ -8,29 +6,42 @@ public class SR_Bullet : MonoBehaviour
 
     Rigidbody bullet_body;
 
+    int pierce;
+
     // Start is called before the first frame update
     void Start()
     {
         bullet_damage = 100;
 
         bullet_body = GetComponent<Rigidbody>();
-
+        
         Destroy(gameObject, 3.0f);
+        
+        pierce = 3;
+
+        Debug.Log("응애 나 애기 저격총");
     }
 
     // Update is called once per frame
     void Update()
     {
-        bullet_body.AddForce(transform.up, ForceMode.Impulse);
+        bullet_body.AddForce(transform.forward, ForceMode.Impulse);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {        
-        if (collision.gameObject.CompareTag("Enemy"))
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(bullet_damage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(bullet_damage);
+            bullet_damage -= 10;
+
+            pierce--;
+            
+            if (pierce == 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
-        Destroy(gameObject);
     }
 }
