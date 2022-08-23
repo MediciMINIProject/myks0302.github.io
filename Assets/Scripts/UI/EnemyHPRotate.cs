@@ -16,6 +16,6 @@ public class EnemyHPRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = cam.rotation;
+        transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.y, 0);
     }
 }

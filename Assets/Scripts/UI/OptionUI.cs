@@ -9,7 +9,7 @@ public class OptionUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GunController.instance.is_lefthands = false;
     }
 
     // Update is called once per frame

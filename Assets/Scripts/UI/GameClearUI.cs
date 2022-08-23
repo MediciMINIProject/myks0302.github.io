@@ -14,16 +14,18 @@ public class GameClearUI : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Exchange()
     {
         SceneManager.LoadScene("SelectGear");
+        Time.timeScale = 1;
     }
 
     public void Quit()
     {
         SceneManager.LoadScene("Title");
+        Time.timeScale = 1;
     }
 }

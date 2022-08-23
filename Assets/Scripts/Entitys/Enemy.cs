@@ -28,17 +28,22 @@ public class Enemy : HP
 
         while (Barricade.instance.transform != null)
         {
-            Vector3 targetposition = new Vector3(Barricade.instance.transform.position.x, 0, Barricade.instance.transform.position.z); //목표 위치 정보 추출
+            Vector3 targetposition = new(Barricade.instance.transform.position.x, 0, Barricade.instance.transform.position.z); //목표 위치 정보 추출
 
-            mapAgent.SetDestination(targetposition); //목표의 위치을 향해 이동
+            if (mapAgent.enabled == true)
+            {
+                mapAgent.SetDestination(targetposition); //목표의 위치을 향해 이동
+
+            }
+
 
             yield return new WaitForSeconds(refreshRate); //일정 시간마다 초기화
         }
     }
 
-    
+
     private void Update()
-    {   
+    {
     }
 }
 

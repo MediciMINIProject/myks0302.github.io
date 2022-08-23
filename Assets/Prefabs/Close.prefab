@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17e33745f82bd841a967e2da395fba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRank: 0
   mapAgent: {fileID: -6004058818970387753}
   closeAnimation: {fileID: 5348642147629694456}
   hp_ui: {fileID: 4528423561490964471}
@@ -155,7 +154,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1001 &5435531983949636574
 PrefabInstance:
@@ -271,6 +270,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 153343831562663232, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153343831562663236, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 153343831964536833, guid: 330099e7ec0e1d0479cef9261e3c8cbf, type: 3}

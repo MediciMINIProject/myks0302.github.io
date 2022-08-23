@@ -16,40 +16,38 @@ public class GameManager : MonoBehaviour
     {
         GameClearUI.gameObject.SetActive(false);
         GameOverUI.gameObject.SetActive(false);
-        restUI.gameObject.SetActive(false);
+        restUI.gameObject.SetActive(false); 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (SpawnSystem.instance.REMAIN <= 0)
+        {
+            restUI.gameObject.SetActive(true);
+            
+            gunController.enabled = false;
+            playUI.SetActive(false);
+
+            //창
+            HandedInputSelector.gameObject.SetActive(true);
+        }
 
         if (Barricade.instance.HITPOINT <= 0)
         {
-            Time.timeScale = 0;
             playUI.SetActive(false);
             GameOverUI.instance.gameObject.SetActive(true);
+            HandedInputSelector.gameObject.SetActive(true);
         }
 
-        if (SpawnSystem.instance.wavecount == 9) 
+        if (SpawnSystem.instance.WAVE == SpawnSystem.instance.mosterWaves.Length) 
         {
             playUI.SetActive(false);
             GameClearUI.gameObject.SetActive(true);
             restUI.gameObject.SetActive(false);
-        }
-
-        if (SpawnSystem.instance.waveremain == 0)
-        {
-
-            playUI.SetActive(false);
-
-            //일시정지
-            Time.timeScale = 0;
-
-            //창
-            restUI.gameObject.SetActive(true);
             HandedInputSelector.gameObject.SetActive(true);
         }
 
-      
+     
     }
 }

@@ -35,15 +35,14 @@ public class Bullet : MonoBehaviour
     {
         bullet_body.AddForce(transform.forward, ForceMode.Impulse);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
 
-        if (collision.gameObject.CompareTag("Enemy"))
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(bullet_damage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(bullet_damage);
+            Destroy(gameObject);
         }
-        
-        Destroy(gameObject);
+
     }
 }

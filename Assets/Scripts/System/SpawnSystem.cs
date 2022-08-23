@@ -63,9 +63,25 @@ public class SpawnSystem : MonoBehaviour
 
     public MosterWave[] mosterWaves;
 
-    public int wavecount; //현재 웨이브
+    int wavecount; //현재 웨이브
+    public int WAVE 
+    {
+        get { return wavecount; }
+        set 
+        {
+            wavecount = value;
+        }
+    }
 
-    public int waveremain; //남은 적 수
+    int waveremain; //남은 적 수
+    public int REMAIN 
+    {
+        get { return waveremain; }
+        set
+        {
+            waveremain = value;
+        }
+    }
 
     public TextMeshProUGUI waveUI;
     public TextMeshProUGUI remainUI;
@@ -108,9 +124,12 @@ public class SpawnSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        wavecount = 0;
+        NUM_CLOSE = mosterWaves[wavecount].num_close;
+        NUM_RANGE = mosterWaves[wavecount].num_range;
+        NUM_DRONE = mosterWaves[wavecount].num_drone;
+        REMAIN = NUM_CLOSE + NUM_RANGE + NUM_DRONE;
 
-        StartCoroutine(WaveSystem());
+        StartCoroutine("WaveSystem");
     }
 
     public IEnumerator WaveSystem()
@@ -120,16 +139,22 @@ public class SpawnSystem : MonoBehaviour
         Spawn_Close(mosterWaves[wavecount].num_close);
         Spawn_Range(mosterWaves[wavecount].num_range);
         Spawn_Drone(mosterWaves[wavecount].num_drone);
+
     }
 
-  
+    
 
     // Update is called once per frame
     void Update()
     {
-        waveremain = mosterWaves[wavecount].num_close + mosterWaves[wavecount].num_range + mosterWaves[wavecount].num_drone;
+        NUM_CLOSE = mosterWaves[wavecount].num_close;
+        NUM_RANGE = mosterWaves[wavecount].num_range;
+        NUM_DRONE = mosterWaves[wavecount].num_drone;
+        
+        REMAIN = NUM_CLOSE + NUM_RANGE + NUM_DRONE;
 
         waveUI.text = "Wave" + "\n" + (wavecount + 1) + " / " + mosterWaves.Length;
-        remainUI.text = "Remain" + "\n" + waveremain;      
+        
+        remainUI.text = "Remain" + "\n" + waveremain;
     }
 }

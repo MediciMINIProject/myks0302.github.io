@@ -51,24 +51,32 @@ public class Close : Enemy
 
         if (this.HITPOINT <= 0)
         {
-            isDead = true;           
+            isDead = true;
         }
 
         if (isDead == true)
         {
             closeAnimation.SetTrigger("Death");
-            
+
             Destroy(this.gameObject, 2f);
 
             //리지드 바디 및 AI 비 활성화
             NavMeshAgent.enabled = false;
             capsuleCollider.enabled = false;
         }
-        
+
+
+        if (SpawnSystem.instance.REMAIN <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDisable()
     {
-        SpawnSystem.instance.NUM_CLOSE -= 1;
+        if (isDead == true)
+        {
+            SpawnSystem.instance.NUM_CLOSE -= 1;
+        }
     }
 }

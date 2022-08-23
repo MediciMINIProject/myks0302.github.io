@@ -77,12 +77,8 @@ public class Gun : MonoBehaviour
         canShoot_M = true;
         canShoot_S = true;
 
-        WeaponUI.instance.MAIN_MAX = magSize;
-        WeaponUI.instance.SUB_MAX = maxStock;
-
-        WeaponUI.instance.main.text = nowMag + " / " + magSize;
-        WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
-
+       
+       
     }
 
     public void MainShoot()
@@ -155,13 +151,13 @@ public class Gun : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && canShoot_M == true)
             {
                 MainShoot();
-                WeaponUI.instance.main.text = nowMag + " / " + magSize;
+                //WeaponUI.instance.main.text = nowMag + " / " + magSize;
             }
 
             if (OVRInput.GetDown(OVRInput.Button.Three) && canShoot_S == true)
             {
                 SubShoot();
-                WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
+                
             }
 
             if (OVRInput.GetDown(OVRInput.Button.Four) && nowMag != magSize)
@@ -174,13 +170,13 @@ public class Gun : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
             {
                 MainShoot();
-                WeaponUI.instance.main.text = nowMag + " / " + magSize;
+                //WeaponUI.instance.main.text = nowMag + " / " + magSize;
             }
 
             if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true)
             {
                 SubShoot();
-                WeaponUI.instance.sub.text = nowStock + " / " + maxStock;
+                
             }
 
             if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
@@ -222,11 +218,11 @@ public class Gun : MonoBehaviour
     }
     public IEnumerator Reload()
     {
-        WeaponUI.instance.main.text = "Reload...";
+        //WeaponUI.instance.main.text = "Reload...";
 
         yield return new WaitForSeconds(3.0f);
 
-        WeaponUI.instance.main.text = nowMag + " / " + magSize;
+        //WeaponUI.instance.main.text = nowMag + " / " + magSize;
 
         canShoot_M = true;
         nowMag = magSize;

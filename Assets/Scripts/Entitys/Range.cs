@@ -42,9 +42,6 @@ public class Range : Enemy
         if (isDead == false && mapAgent.remainingDistance <= (mapAgent.stoppingDistance + 0.5f))
         {
             rangeAnimation.SetTrigger("Attack");
-            //공격
-
-            //데미지
 
         }
         else if (isDead == false && mapAgent.remainingDistance > (mapAgent.stoppingDistance + 0.5f))
@@ -68,11 +65,17 @@ public class Range : Enemy
             capsuleCollider.enabled = false;
         }
 
-
+        if (SpawnSystem.instance.REMAIN <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDisable()
     {
-        SpawnSystem.instance.NUM_RANGE -= 1;
+        if (isDead == true)
+        {
+            SpawnSystem.instance.NUM_RANGE -= 1;
+        }
     }
 }

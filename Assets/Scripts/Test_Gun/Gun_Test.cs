@@ -32,15 +32,14 @@ public class Gun_Test : MonoBehaviour
 
     bool isReload;
 
-    int maxStock;
-    int nowStock;
+    float delay_time = 5.0f;
 
     bool isDelay;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject prefab in weaponPrefabs) 
+        foreach (GameObject prefab in weaponPrefabs)
         {
             prefab.SetActive(false);
         }
@@ -54,13 +53,13 @@ public class Gun_Test : MonoBehaviour
                 nowMuzzle = muzzle[0];
                 weaponPrefabs[0].SetActive(true);
                 break;
-            
+
             case GunType.SMG:
                 maxMag = 25;
                 nowMuzzle = muzzle[1];
                 weaponPrefabs[1].SetActive(true);
                 break;
-            
+
             case GunType.AR:
                 maxMag = 40;
                 nowMuzzle = muzzle[2];
@@ -68,20 +67,16 @@ public class Gun_Test : MonoBehaviour
                 break;
         }
 
-        WeaponUI.instance.MAIN_MAX = maxMag;
-        WeaponUI.instance.SUB_MAX = maxStock;
+
+
         nowMag = maxMag;
 
-        maxStock = 3;
-        nowStock = maxStock;
+        WeaponUI.instance.main_bar.maxValue = maxMag;
 
 
-        if (nowStock <= maxStock)
-        {
-            InvokeRepeating(nameof(Recharge), 0, 5);
-        }
+        WeaponUI.instance.sub_bar.maxValue = delay_time;
 
-        
+        WeaponUI.instance.sub_bar.value = WeaponUI.instance.sub_bar.maxValue;
     }
 
     public void Shooting_M()
@@ -96,58 +91,34 @@ public class Gun_Test : MonoBehaviour
 
     public void Shooting_S()
     {
-        if (nowStock > 0)
+
+        switch (subType)
         {
-            switch (subType)
-            {
-                case SubType.SG:
-                    SG_Test newSG = Instantiate(SG_Test, nowMuzzle.position, nowMuzzle.rotation);
-                    newSG.SG_Shoot();
-                    break;
-                case SubType.SR:
-                    SR_Test newSR = Instantiate(SR_Test, nowMuzzle.position, nowMuzzle.rotation);
-                    newSR.SR_Shoot();
-                    break;
-                case SubType.GL:
-                    Sub_GL newGL = Instantiate(Sub_GL, nowMuzzle.position, nowMuzzle.rotation);
-                    newGL.GL_Shoot();
-                    break;
-            }
+            case SubType.SG:
+                SG_Test newSG = Instantiate(SG_Test, nowMuzzle.position, nowMuzzle.rotation);
+                newSG.SG_Shoot();
+                break;
+            case SubType.SR:
+                SR_Test newSR = Instantiate(SR_Test, nowMuzzle.position, nowMuzzle.rotation);
+                newSR.SR_Shoot();
+                break;
+            case SubType.GL:
+                Sub_GL newGL = Instantiate(Sub_GL, nowMuzzle.position, nowMuzzle.rotation);
+                newGL.GL_Shoot();
+                break;
         }
 
-        nowStock--; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (GunController.instance.is_lefthands == true)
-        {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
-            {
-                Shooting_M();
-
-            }
-
-            if (OVRInput.GetDown(OVRInput.Button.Three) && isDelay == false)
-            {
-                Shooting_S();
-                StartCoroutine(Delay());
-            }
-
-            if (OVRInput.GetDown(OVRInput.Button.Four))
-            {
-                StartCoroutine(Reload());
-            }
-        }
-        else 
+        if (GunController.instance.enabled == true)
         {
             if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
             {
                 Shooting_M();
-
             }
 
             if (OVRInput.GetDown(OVRInput.Button.One) && isDelay == false)
@@ -163,25 +134,42 @@ public class Gun_Test : MonoBehaviour
         }
 
 
+
         if (nowMag < 0)
         {
             nowMag = 0;
         }
 
+        WeaponUI.instance.main_bar.value = nowMag;
+
         if (isReload == true)
         {
-            WeaponUI.instance.main.text = "Reload...";
+            WeaponUI.instance.main_text.text = "Reloading...";
         }
-
-        
-
-        if (nowStock > maxStock)
+        else
         {
-            nowStock = maxStock;
+            WeaponUI.instance.main_text.text = nowMag + " / " + maxMag;
         }
 
-        WeaponUI.instance.MAIN_NOW = nowMag;
-        WeaponUI.instance.SUB_NOW = nowStock;
+
+
+
+        if (isDelay == true)
+        {
+            WeaponUI.instance.sub_bar.value -= Time.deltaTime;
+
+            if (WeaponUI.instance.sub_bar.value < 0)
+            {
+                WeaponUI.instance.sub_bar.value = 0;
+            }
+
+            WeaponUI.instance.sub_text.text = "STANDBY";
+        }
+        else 
+        {
+            WeaponUI.instance.sub_text.text = "READY";
+        }
+
     }
 
     public IEnumerator Reload()
@@ -198,13 +186,9 @@ public class Gun_Test : MonoBehaviour
     {
         isDelay = true;
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(delay_time);
 
+        WeaponUI.instance.sub_bar.value = delay_time;
         isDelay = false;
-    }
-
-    public void Recharge()
-    {
-        nowStock += 1;
     }
 }

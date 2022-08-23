@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shift UI Manager
   m_EditorClassIdentifier: 
   enableDynamicUpdate: 1
-  enableExtendedColorPicker: 0
+  enableExtendedColorPicker: 1
   editorHints: 1
   backgroundColorTint: {r: 0.627451, g: 0.88235295, b: 1, a: 1}
   backgroundType: 1

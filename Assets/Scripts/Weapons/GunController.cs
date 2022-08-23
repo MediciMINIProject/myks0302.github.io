@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
-
     public static GunController instance;
 
     private void Awake()

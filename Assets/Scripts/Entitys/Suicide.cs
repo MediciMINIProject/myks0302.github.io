@@ -7,7 +7,7 @@ public class Suicide : Enemy
     public HP_UI hp_ui;
 
     private NavMeshAgent NavMeshAgent;
-    private CapsuleCollider capsuleCollider;
+    private BoxCollider BoxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class Suicide : Enemy
         StartCoroutine(Approach());
 
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        BoxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -55,14 +55,24 @@ public class Suicide : Enemy
             Destroy(this.gameObject, 3f);
 
             //리지드 바디 및 AI 비 활성화
+
             NavMeshAgent.enabled = false;
-            capsuleCollider.enabled = false;
+            BoxCollider.enabled = false;
+        }
+
+        if (SpawnSystem.instance.REMAIN <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 
 
     private void OnDisable()
     {
-        SpawnSystem.instance.NUM_DRONE -= 1;
+
+        if (isDead == true)
+        {
+            SpawnSystem.instance.NUM_DRONE -= 1;
+        }
     }
 }
