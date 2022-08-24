@@ -140,14 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c6c8667a81be647a2661a67308c13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefabs:
-  - {fileID: 2107786334872645204}
-  - {fileID: 5487018957900984391}
-  - {fileID: 7117922061199880849}
-  muzzle:
-  - {fileID: 1264451889197979529}
-  - {fileID: 8072101032579907320}
-  - {fileID: 5322722706746415245}
+  pistolPrefab: {fileID: 2107786334872645204}
+  smgPrefab: {fileID: 5487018957900984391}
+  arPrefab: {fileID: 7117922061199880849}
+  pistolMuzzle: {fileID: 1264451889197979529}
+  smgMuzzle: {fileID: 8072101032579907320}
+  arMuzzle: {fileID: 5322722706746415245}
   bullet: {fileID: 3785275346075591181, guid: cd5f6fccfcf03f7448f2b9aa958cfb0c, type: 3}
   SG_Test: {fileID: 8500007646087507367, guid: 9925f5ed3e4feb24d9a5cae43fe9795f, type: 3}
   Sub_GL: {fileID: 1377414860142079721, guid: 04bb15c1307289149ae71de14a1d40f1, type: 3}

@@ -9,23 +9,34 @@ public class GameClearUI : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         GameClearUI.instance = this;
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SpawnSystem.instance.WAVE = 0;
+
+        SpawnSystem.instance.NUM_CLOSE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_close;
+        SpawnSystem.instance.NUM_RANGE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_range;
+        SpawnSystem.instance.NUM_DRONE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_drone;
+
+        SpawnSystem.instance.REMAIN = SpawnSystem.instance.NUM_CLOSE + SpawnSystem.instance.NUM_RANGE + SpawnSystem.instance.NUM_DRONE;
+
+        SpawnSystem.instance.StartCoroutine("WaveSystem");
+        
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
     public void Exchange()
     {
-        SceneManager.LoadScene("SelectGear");
         Time.timeScale = 1;
+        SceneManager.LoadSceneAsync("SelectGear");
     }
 
     public void Quit()
     {
-        SceneManager.LoadScene("Title");
         Time.timeScale = 1;
+        SceneManager.LoadSceneAsync("Title");
     }
 }

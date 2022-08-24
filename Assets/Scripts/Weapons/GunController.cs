@@ -15,8 +15,6 @@ public class GunController : MonoBehaviour
     public Gun_Test selectedGun;
     Gun_Test startGun;
 
-    public bool is_lefthands;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,16 +34,10 @@ public class GunController : MonoBehaviour
             Destroy(startGun.gameObject);
         }
 
-        if (is_lefthands == true)
-        {
-            startGun = Instantiate(startedGun, grabHands[1].position, grabHands[1].rotation);
-            startGun.transform.parent = grabHands[1];
-        }
-        else
-        {
+        
             startGun = Instantiate(startedGun, grabHands[0].position, grabHands[0].rotation);
             startGun.transform.parent = grabHands[0];
-        }
+
 
     }
 

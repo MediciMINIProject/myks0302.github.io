@@ -41,6 +41,8 @@ public class Suicide : Enemy
 
             Barricade.instance.GetComponent<HP>().TakeDamage(100);
 
+            isDead = true;
+
             Destroy(this.gameObject);
         }
 
@@ -60,7 +62,7 @@ public class Suicide : Enemy
             BoxCollider.enabled = false;
         }
 
-        if (SpawnSystem.instance.REMAIN <= 0)
+        if (SpawnSystem.instance.REMAIN <= 0 || Time.timeScale == 0)
         {
             Destroy(this.gameObject);
         }
@@ -69,7 +71,6 @@ public class Suicide : Enemy
 
     private void OnDisable()
     {
-
         if (isDead == true)
         {
             SpawnSystem.instance.NUM_DRONE -= 1;

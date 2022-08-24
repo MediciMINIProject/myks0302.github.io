@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     int magSize; //장탄수
     float push_Pow; //저지력
 
+    float reload_time; //재장전 시간
+
     bool canShoot_M; //사격 가능 여부
     #endregion
 
@@ -30,9 +32,7 @@ public class Gun : MonoBehaviour
     int maxStock = 3; //최대 스톡
     int nowStock; //현재 스톡
 
-    float coolDown; //장비 쿨타임
-
-    float chargeTime; //스톡 충전 시간
+    float coolDown; //부장비 쿨타임
     #endregion
 
     #region 이펙트 관련
@@ -57,16 +57,19 @@ public class Gun : MonoBehaviour
                 damage = 50;
                 magSize = 8;
                 push_Pow = 0.5f;
+                reload_time = 1.5f;
                 break;
             case GunType.SMG:
                 damage = 15;
                 magSize = 25;
                 push_Pow = 0.2f;
+                reload_time = 1.0f;
                 break;
             case GunType.AR:
                 damage = 25;
                 magSize = 40;
                 push_Pow = 0.3f;
+                reload_time = 2.0f;
                 break;
         }
 
@@ -77,8 +80,8 @@ public class Gun : MonoBehaviour
         canShoot_M = true;
         canShoot_S = true;
 
-       
-       
+
+
     }
 
     public void MainShoot()
@@ -90,7 +93,7 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, 30.0f, 1 << 8))
         {
             Debug.Log("Shoot");
-            
+
 
 
             GameObject bi = Instantiate(shootEffect);
@@ -121,22 +124,24 @@ public class Gun : MonoBehaviour
         switch (subType)
         {
             case SubType.SG:
+                coolDown = 2;
                 Sub_SG newSG = Instantiate(Sub_SG, muzzle.position, muzzle.rotation);
                 newSG.SG_Shoot();
                 break;
 
             case SubType.SR:
+                coolDown = 1.5f;
                 Sub_SR newSR = Instantiate(Sub_SR, muzzle.position, muzzle.rotation);
                 newSR.SR_Shoot();
                 break;
 
             case SubType.GL:
-                Sub_GL newGL = Instantiate(Sub_GL, muzzle.position, muzzle.rotation);
+                coolDown = 3f;
+               Sub_GL newGL = Instantiate(Sub_GL, muzzle.position, muzzle.rotation);
                 newGL.GL_Shoot();
                 break;
         }
 
-        nowStock--;
     }
 
 
@@ -146,46 +151,24 @@ public class Gun : MonoBehaviour
         Debug.DrawRay(muzzle.position, muzzle.forward * 30.0f, Color.green);
 
 
-        if (GunController.instance.is_lefthands == true)
+
+
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && canShoot_M == true)
-            {
-                MainShoot();
-                //WeaponUI.instance.main.text = nowMag + " / " + magSize;
-            }
-
-            if (OVRInput.GetDown(OVRInput.Button.Three) && canShoot_S == true)
-            {
-                SubShoot();
-                
-            }
-
-            if (OVRInput.GetDown(OVRInput.Button.Four) && nowMag != magSize)
-            {
-                StartCoroutine(Reload());
-            }
-        }
-        else
-        {
-            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && canShoot_M == true)
-            {
-                MainShoot();
-                //WeaponUI.instance.main.text = nowMag + " / " + magSize;
-            }
-
-            if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true)
-            {
-                SubShoot();
-                
-            }
-
-            if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
-            {
-                StartCoroutine(Reload());
-            }
+            MainShoot();
+            //WeaponUI.instance.main.text = nowMag + " / " + magSize;
         }
 
+        if (OVRInput.GetDown(OVRInput.Button.One) && canShoot_S == true)
+        {
+            SubShoot();
 
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != magSize)
+        {
+            StartCoroutine(Reload());
+        }
 
 
         if (nowMag <= 0)
@@ -218,31 +201,11 @@ public class Gun : MonoBehaviour
     }
     public IEnumerator Reload()
     {
-        //WeaponUI.instance.main.text = "Reload...";
-
-        yield return new WaitForSeconds(3.0f);
-
-        //WeaponUI.instance.main.text = nowMag + " / " + magSize;
+        yield return new WaitForSeconds(reload_time);
 
         canShoot_M = true;
         nowMag = magSize;
     }
 
-    public IEnumerator Recharge()
-    {
-        if (nowStock != maxStock)
-        {
-            yield return new WaitForSeconds(3.0f);
 
-            nowStock++;
-           
-            StartCoroutine(nameof(Recharge), 3.0f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(0); //조건 불만족시 연속
-
-            StartCoroutine(nameof(Recharge)); //조건을 만족 안하면 딜레이 없이 계속 실행
-        }
-    }
 }

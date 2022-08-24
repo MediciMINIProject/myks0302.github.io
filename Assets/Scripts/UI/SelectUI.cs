@@ -56,11 +56,11 @@ public class SelectUI : MonoBehaviour
 
     public void BacktoLobby()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadSceneAsync("Title");
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadSceneAsync("Game");
     }
 }

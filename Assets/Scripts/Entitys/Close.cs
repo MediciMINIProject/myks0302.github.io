@@ -66,7 +66,7 @@ public class Close : Enemy
         }
 
 
-        if (SpawnSystem.instance.REMAIN <= 0)
+        if (SpawnSystem.instance.REMAIN <= 0 || Time.timeScale == 0)
         {
             Destroy(this.gameObject);
         }

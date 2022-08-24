@@ -16,37 +16,44 @@ public class GameManager : MonoBehaviour
     {
         GameClearUI.gameObject.SetActive(false);
         GameOverUI.gameObject.SetActive(false);
-        restUI.gameObject.SetActive(false); 
+        restUI.gameObject.SetActive(false);
+        HandedInputSelector.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SpawnSystem.instance.REMAIN <= 0)
+        if ((SpawnSystem.instance.REMAIN <= 0) && (SpawnSystem.instance.WAVE != SpawnSystem.instance.mosterWaves.Length - 1))
         {
-            restUI.gameObject.SetActive(true);
-            
-            gunController.enabled = false;
             playUI.SetActive(false);
-
-            //â
+            gunController.enabled = false;
+            
+            restUI.gameObject.SetActive(true);
             HandedInputSelector.gameObject.SetActive(true);
+
+            Time.timeScale = 0;
+        }
+        else if ((SpawnSystem.instance.REMAIN <= 0) && (SpawnSystem.instance.WAVE == SpawnSystem.instance.mosterWaves.Length - 1)) 
+        {
+            playUI.SetActive(false);
+            gunController.enabled = false;
+
+            GameClearUI.gameObject.SetActive(true);           
+            HandedInputSelector.gameObject.SetActive(true);
+
+            Time.timeScale = 0;
         }
 
         if (Barricade.instance.HITPOINT <= 0)
         {
             playUI.SetActive(false);
+            
             GameOverUI.instance.gameObject.SetActive(true);
             HandedInputSelector.gameObject.SetActive(true);
+
+            Time.timeScale = 0;
         }
 
-        if (SpawnSystem.instance.WAVE == SpawnSystem.instance.mosterWaves.Length) 
-        {
-            playUI.SetActive(false);
-            GameClearUI.gameObject.SetActive(true);
-            restUI.gameObject.SetActive(false);
-            HandedInputSelector.gameObject.SetActive(true);
-        }
 
      
     }

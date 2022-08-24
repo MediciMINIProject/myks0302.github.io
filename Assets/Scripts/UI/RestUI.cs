@@ -26,13 +26,13 @@ public class RestUI : MonoBehaviour
         SpawnSystem.instance.REMAIN = SpawnSystem.instance.NUM_CLOSE + SpawnSystem.instance.NUM_RANGE + SpawnSystem.instance.NUM_DRONE;
 
         this.gameObject.SetActive(false);
-
-        //Ã¢ ´Ý±â
         gameObject.SetActive(false);
+        HandedInputSelector.gameObject.SetActive(false);
 
         gunController.enabled = true;
-        playUI.SetActive(true);      
-        HandedInputSelector.gameObject.SetActive(false);
+        playUI.SetActive(true);
+
+        Time.timeScale = 1;
 
         _ = SpawnSystem.instance.StartCoroutine("WaveSystem");
     }

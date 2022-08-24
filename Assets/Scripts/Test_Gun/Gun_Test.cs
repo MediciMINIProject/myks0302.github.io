@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Gun_Test : MonoBehaviour
 {
+    GunController gunController;
+
     public static Gun_Test instance;
 
     private void Awake()
@@ -16,10 +18,15 @@ public class Gun_Test : MonoBehaviour
     public enum SubType { SG, SR, GL };
     public static SubType subType; //부무기 종류
 
-    public GameObject[] weaponPrefabs;
+    public GameObject pistolPrefab;
+    public GameObject smgPrefab;
+    public GameObject arPrefab;
 
-    public Transform[] muzzle; //총구
-    Transform nowMuzzle; //나와야 하는 총구
+    public Transform pistolMuzzle;
+    public Transform smgMuzzle;
+    public Transform arMuzzle;
+
+    Transform nowMuzzle;
 
     public Bullet bullet;//탄환
 
@@ -30,19 +37,25 @@ public class Gun_Test : MonoBehaviour
     int maxMag; //총기마다 설정된 기본 탄창
     int nowMag; //현재 남은 탄환 개수
 
+    float reload_time;
     bool isReload;
 
-    float delay_time = 5.0f;
-
+    float delay_time;
     bool isDelay;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject prefab in weaponPrefabs)
+        gunController = GetComponentInParent<GunController>();
+
+        if (gunController.enabled == true) 
         {
-            prefab.SetActive(false);
+            pistolPrefab.SetActive(false);
+            smgPrefab.SetActive(false);
+            arPrefab.SetActive(false);
         }
+
 
         isReload = false;
 
@@ -50,30 +63,47 @@ public class Gun_Test : MonoBehaviour
         {
             case GunType.HG:
                 maxMag = 8;
-                nowMuzzle = muzzle[0];
-                weaponPrefabs[0].SetActive(true);
+                pistolPrefab.SetActive(true);
+                pistolMuzzle.gameObject.SetActive(true);
+                nowMuzzle = pistolMuzzle;
+                reload_time = 1.5f;
                 break;
 
             case GunType.SMG:
                 maxMag = 25;
-                nowMuzzle = muzzle[1];
-                weaponPrefabs[1].SetActive(true);
+                smgPrefab.SetActive(true);
+                smgMuzzle.gameObject.SetActive(true);
+                nowMuzzle = smgMuzzle;
+                reload_time = 1f;
                 break;
 
             case GunType.AR:
                 maxMag = 40;
-                nowMuzzle = muzzle[2];
-                weaponPrefabs[2].SetActive(true);
+                pistolMuzzle.gameObject.SetActive(true);
+                arMuzzle.gameObject.SetActive(true);
+                nowMuzzle = arMuzzle;
+                reload_time = 2f;
                 break;
         }
-
-
-
         nowMag = maxMag;
 
         WeaponUI.instance.main_bar.maxValue = maxMag;
 
 
+        switch (subType)
+        {
+            case SubType.SG:
+                delay_time = 2f;
+                break;
+
+            case SubType.SR:
+                delay_time = 1.5f;
+                break;
+
+            case SubType.GL:
+                delay_time = 3f;
+                break;
+        }
         WeaponUI.instance.sub_bar.maxValue = delay_time;
 
         WeaponUI.instance.sub_bar.value = WeaponUI.instance.sub_bar.maxValue;
@@ -83,7 +113,20 @@ public class Gun_Test : MonoBehaviour
     {
         if (nowMag != 0)
         {
-            Instantiate(bullet, nowMuzzle);
+            switch (gunType)
+            {
+                case GunType.HG:
+                    Instantiate(bullet, pistolMuzzle);
+                    break;
+
+                case GunType.SMG:
+                    Instantiate(bullet, smgMuzzle);
+                    break;
+
+                case GunType.AR:
+                    Instantiate(bullet, arMuzzle);
+                    break;
+            }
         }
 
         nowMag--;
@@ -91,20 +134,24 @@ public class Gun_Test : MonoBehaviour
 
     public void Shooting_S()
     {
-
         switch (subType)
         {
             case SubType.SG:
                 SG_Test newSG = Instantiate(SG_Test, nowMuzzle.position, nowMuzzle.rotation);
                 newSG.SG_Shoot();
+                delay_time = 2f;
                 break;
+
             case SubType.SR:
                 SR_Test newSR = Instantiate(SR_Test, nowMuzzle.position, nowMuzzle.rotation);
                 newSR.SR_Shoot();
+                delay_time = 1.5f;
                 break;
+
             case SubType.GL:
                 Sub_GL newGL = Instantiate(Sub_GL, nowMuzzle.position, nowMuzzle.rotation);
                 newGL.GL_Shoot();
+                delay_time = 3f;
                 break;
         }
 
@@ -127,7 +174,7 @@ public class Gun_Test : MonoBehaviour
                 StartCoroutine(Delay());
             }
 
-            if (OVRInput.GetDown(OVRInput.Button.Two))
+            if (OVRInput.GetDown(OVRInput.Button.Two) && nowMag != maxMag)
             {
                 StartCoroutine(Reload());
             }
@@ -165,7 +212,7 @@ public class Gun_Test : MonoBehaviour
 
             WeaponUI.instance.sub_text.text = "STANDBY";
         }
-        else 
+        else
         {
             WeaponUI.instance.sub_text.text = "READY";
         }
@@ -176,7 +223,7 @@ public class Gun_Test : MonoBehaviour
     {
         isReload = true;
 
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(reload_time);
 
         isReload = false;
         nowMag = maxMag;

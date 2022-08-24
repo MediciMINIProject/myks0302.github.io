@@ -65,7 +65,7 @@ public class Range : Enemy
             capsuleCollider.enabled = false;
         }
 
-        if (SpawnSystem.instance.REMAIN <= 0)
+        if (SpawnSystem.instance.REMAIN <= 0 || Time.timeScale == 0)
         {
             Destroy(this.gameObject);
         }
