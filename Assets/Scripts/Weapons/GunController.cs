@@ -1,5 +1,5 @@
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class GunController : MonoBehaviour
         if (selectedGun != null)
         {
             EquipGun(selectedGun);
-        }     
+        }
 
         //게임 도중에는 끄기
     }
@@ -33,12 +33,8 @@ public class GunController : MonoBehaviour
         {
             Destroy(startGun.gameObject);
         }
-
-        
-            startGun = Instantiate(startedGun, grabHands[0].position, grabHands[0].rotation);
-            startGun.transform.parent = grabHands[0];
-
-
+        startGun = Instantiate(startedGun, grabHands[0].position, grabHands[0].rotation);
+        startGun.transform.parent = grabHands[0];
     }
 
     public void MainShoot()

@@ -12,13 +12,6 @@ public class Sub_GL : MonoBehaviour
     int damage = 75; //주는 피해
 
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void GL_Shoot() //발사 매커니즘
     {
         this.GetComponent<Rigidbody>().AddForce(transform.forward * 40.0f, ForceMode.Impulse);

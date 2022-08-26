@@ -15,17 +15,28 @@ public class Close : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        //체력 배정
-        STARTHP = 150;
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        switch (rank)
+        {
+            case Rank.Nor:
+                //체력 배정
+                STARTHP = 150;
+                NavMeshAgent.speed = 2.75f;
+                break;
+
+            case Rank.Eli:
+                //체력 배정
+                STARTHP = 400;
+                NavMeshAgent.speed = 3.5f;
+                break;
+        }
 
         this.HITPOINT = this.STARTHP;
 
         hp_ui.HPSlider.maxValue = STARTHP;
 
         StartCoroutine(Approach());
-
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
 
@@ -76,7 +87,17 @@ public class Close : Enemy
     {
         if (isDead == true)
         {
-            SpawnSystem.instance.NUM_CLOSE -= 1;
+            switch (rank)
+            {
+                case Rank.Nor:
+                    SpawnSystem.instance.NUM_CLOSE -= 1;
+                    break;
+
+                case Rank.Eli:
+                    SpawnSystem.instance.NUM_CLOSE_E -= 1;
+                    break;
+
+            }
         }
     }
 }

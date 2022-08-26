@@ -10,6 +10,10 @@ public class Gun_Test : MonoBehaviour
     private void Awake()
     {
         Gun_Test.instance = this;
+
+        pistolPrefab.SetActive(false);
+        smgPrefab.SetActive(false);
+        arPrefab.SetActive(false);
     }
 
     public enum GunType { HG, SMG, AR };
@@ -43,19 +47,10 @@ public class Gun_Test : MonoBehaviour
     float delay_time;
     bool isDelay;
 
-
     // Start is called before the first frame update
     void Start()
     {
         gunController = GetComponentInParent<GunController>();
-
-        if (gunController.enabled == true) 
-        {
-            pistolPrefab.SetActive(false);
-            smgPrefab.SetActive(false);
-            arPrefab.SetActive(false);
-        }
-
 
         isReload = false;
 
@@ -79,7 +74,7 @@ public class Gun_Test : MonoBehaviour
 
             case GunType.AR:
                 maxMag = 40;
-                pistolMuzzle.gameObject.SetActive(true);
+                arPrefab.SetActive(true);
                 arMuzzle.gameObject.SetActive(true);
                 nowMuzzle = arMuzzle;
                 reload_time = 2f;
@@ -88,7 +83,6 @@ public class Gun_Test : MonoBehaviour
         nowMag = maxMag;
 
         WeaponUI.instance.main_bar.maxValue = maxMag;
-
 
         switch (subType)
         {
@@ -111,24 +105,12 @@ public class Gun_Test : MonoBehaviour
 
     public void Shooting_M()
     {
+
+        
         if (nowMag != 0)
         {
-            switch (gunType)
-            {
-                case GunType.HG:
-                    Instantiate(bullet, pistolMuzzle);
-                    break;
-
-                case GunType.SMG:
-                    Instantiate(bullet, smgMuzzle);
-                    break;
-
-                case GunType.AR:
-                    Instantiate(bullet, arMuzzle);
-                    break;
-            }
+            Instantiate(bullet, nowMuzzle.position, nowMuzzle.rotation);
         }
-
         nowMag--;
     }
 
@@ -139,19 +121,19 @@ public class Gun_Test : MonoBehaviour
             case SubType.SG:
                 SG_Test newSG = Instantiate(SG_Test, nowMuzzle.position, nowMuzzle.rotation);
                 newSG.SG_Shoot();
-                delay_time = 2f;
+                delay_time = 3f;
                 break;
 
             case SubType.SR:
                 SR_Test newSR = Instantiate(SR_Test, nowMuzzle.position, nowMuzzle.rotation);
                 newSR.SR_Shoot();
-                delay_time = 1.5f;
+                delay_time = 2f;
                 break;
 
             case SubType.GL:
                 Sub_GL newGL = Instantiate(Sub_GL, nowMuzzle.position, nowMuzzle.rotation);
                 newGL.GL_Shoot();
-                delay_time = 3f;
+                delay_time = 4f;
                 break;
         }
 

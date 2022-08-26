@@ -7,6 +7,7 @@ public class GameClearUI : MonoBehaviour
 {
     public static GameClearUI instance;
 
+    public GunController gunController;
     private void Awake()
     {
         Time.timeScale = 1;
@@ -16,26 +17,20 @@ public class GameClearUI : MonoBehaviour
     public void Restart()
     {
         SpawnSystem.instance.WAVE = 0;
-
-        SpawnSystem.instance.NUM_CLOSE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_close;
-        SpawnSystem.instance.NUM_RANGE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_range;
-        SpawnSystem.instance.NUM_DRONE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_drone;
-
-        SpawnSystem.instance.REMAIN = SpawnSystem.instance.NUM_CLOSE + SpawnSystem.instance.NUM_RANGE + SpawnSystem.instance.NUM_DRONE;
-
-        SpawnSystem.instance.StartCoroutine("WaveSystem");
-        
+        SpawnSystem.instance.Count_Reset();
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
     public void Exchange()
     {
+        gunController.enabled = false;
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync("SelectGear");
     }
 
     public void Quit()
     {
+        gunController.enabled = false;
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync("Title");
     }

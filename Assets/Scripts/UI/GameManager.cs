@@ -2,18 +2,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        GameManager.instance = this;
+    }
+    
+    
     public GameClearUI GameClearUI;
     public GameOverUI GameOverUI;
     public RestUI restUI;
     public GameObject playUI;
 
     public HandedInputSelector HandedInputSelector;
+    public GunController gunController;
 
-    public GunController gunController; 
+    public enum Level { Easy, Normal,Hard }
+    public static Level level = Level.Normal;
 
     // Start is called before the first frame update
     void Start()
     {
+        gunController.enabled = true;
         GameClearUI.gameObject.SetActive(false);
         GameOverUI.gameObject.SetActive(false);
         restUI.gameObject.SetActive(false);
@@ -52,9 +63,6 @@ public class GameManager : MonoBehaviour
             HandedInputSelector.gameObject.SetActive(true);
 
             Time.timeScale = 0;
-        }
-
-
-     
+        }   
     }
 }

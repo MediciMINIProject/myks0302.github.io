@@ -19,15 +19,8 @@ public class GameOverUI : MonoBehaviour
         Time.timeScale = 1;
 
         SpawnSystem.instance.WAVE = 0;
+        SpawnSystem.instance.Enemy_Total(SpawnSystem.instance.WAVE);
 
-        SpawnSystem.instance.NUM_CLOSE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_close;
-        SpawnSystem.instance.NUM_RANGE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_range;
-        SpawnSystem.instance.NUM_DRONE = SpawnSystem.instance.mosterWaves[SpawnSystem.instance.WAVE].num_drone;
-
-        SpawnSystem.instance.REMAIN = SpawnSystem.instance.NUM_CLOSE + SpawnSystem.instance.NUM_RANGE + SpawnSystem.instance.NUM_DRONE;
-
-        SpawnSystem.instance.StartCoroutine("WaveSystem");
-        
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 

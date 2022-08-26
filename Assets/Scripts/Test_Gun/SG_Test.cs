@@ -8,8 +8,8 @@ public class SG_Test : MonoBehaviour
     public Pellet pellet;
     public Transform muzzle;
 
-    int pellets = 8; // 탄환 수
-    float spreadAngle = 5f; //흩어지는 정도
+    int pellets = 10; // 탄환 수
+    float spreadAngle = 3.5f; //흩어지는 정도
 
     List<Quaternion> sgShell;
 

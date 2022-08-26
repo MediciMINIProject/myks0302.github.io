@@ -7,7 +7,6 @@ public class Range : Enemy
 
     protected float distance; //자신과 타겟간의 거리
 
-
     public HP_UI hp_ui;
 
     private NavMeshAgent NavMeshAgent;
@@ -16,9 +15,25 @@ public class Range : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        //체력 배정
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        
+        switch (rank)
+        {
+            case Rank.Nor:
+                //체력 배정
+                STARTHP = 100;
+                NavMeshAgent.speed = 3.5f;
+                mapAgent.stoppingDistance = 10f;
+                break;
 
-        STARTHP = 100;
+            case Rank.Eli:
+                //체력 배정
+                STARTHP = 150;
+                NavMeshAgent.speed = 4.5f;
+                mapAgent.stoppingDistance = 17.5f;
+                break;
+        }
 
         StartCoroutine(Approach());
 
@@ -26,8 +41,6 @@ public class Range : Enemy
 
         hp_ui.HPSlider.maxValue = STARTHP;
 
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
 
@@ -48,7 +61,7 @@ public class Range : Enemy
         {
             rangeAnimation.SetBool("Walk", true);
         }
-
+        
         if (this.HITPOINT <= 0)
         {
             isDead = true;
@@ -75,7 +88,19 @@ public class Range : Enemy
     {
         if (isDead == true)
         {
-            SpawnSystem.instance.NUM_RANGE -= 1;
+            switch (rank)
+            {
+                case Rank.Nor:
+                    SpawnSystem.instance.NUM_RANGE -= 1;
+                    break;
+
+                case Rank.Eli:
+                    SpawnSystem.instance.NUM_RANGE_E -= 1;
+                    break;
+
+            }
         }
     }
+
+ 
 }

@@ -13,6 +13,10 @@ public class Enemy : HP
     protected bool isDead; //사망 상태 여부
     #endregion
 
+    #region 몬스터 랭크
+    public enum Rank { Nor, Eli }
+    public Rank rank;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
